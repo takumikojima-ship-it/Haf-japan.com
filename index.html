@@ -145,7 +145,8 @@
                          <!-- Logo 1: Hire Craft -->
                          <div class="relative z-10 w-full flex flex-col items-center justify-center transform transition duration-300 group-hover:translate-x-1">
                             <!-- JPEG画像の白背景を馴染ませるために mix-blend-multiply を適用 -->
-                            <img src="HireCraft rogo.jpg" alt="Hire Craft" class="w-48 md:w-64 h-auto object-contain mix-blend-multiply">
+                            <!-- 画像サイズを縮小: w-48 md:w-64 -> w-40 md:w-52 -->
+                            <img src="HireCraft rogo.jpg" alt="Hire Craft" class="w-40 md:w-52 h-20 object-contain mix-blend-multiply">
                          </div>
 
                          <!-- Divider -->
@@ -153,7 +154,8 @@
 
                          <!-- Logo 2: Brand Craft -->
                          <div class="relative z-10 w-full flex flex-col items-center justify-center transform transition duration-300 group-hover:translate-x-1" style="transition-delay: 100ms;">
-                            <img src="BrandCraft rogo.png" alt="Brand Craft" class="w-48 md:w-64 h-auto object-contain">
+                             <!-- 画像サイズを縮小: w-48 md:w-64 -> w-40 md:w-52 -->
+                            <img src="BrandCraft rogo.png" alt="Brand Craft" class="w-40 md:w-52 h-20 object-contain">
                          </div>
 
                          <!-- Divider -->
@@ -162,7 +164,9 @@
                          <!-- Logo 3: ENGINE -->
                          <div class="relative z-10 w-full flex flex-col items-center justify-center transform transition duration-300 group-hover:translate-x-1" style="transition-delay: 200ms;">
                              <!-- JPEG画像の白背景を馴染ませるために mix-blend-multiply を適用 -->
-                             <img src="Engine rogo.jpg" alt="ENGINE" class="w-40 md:w-52 h-auto object-contain mix-blend-multiply">
+                             <!-- 画像サイズを縮小: w-40 md:w-52 -> w-32 md:w-44 (ENGINEは元々少し小さめに見える可能性があるためバランス調整) -->
+                             <!-- 統一感を出すため、ここも w-40 md:w-52 ベースに合わせつつ、h-20で高さ制限をかけます -->
+                             <img src="Engine rogo.jpg" alt="ENGINE" class="w-36 md:w-48 h-20 object-contain mix-blend-multiply">
                          </div>
                     </div>
                     
@@ -341,7 +345,7 @@
                     
                     <div class="mt-6 bg-slate-50 p-4 rounded-lg border border-slate-100">
                         <p class="text-xs text-slate-500 text-center leading-relaxed">
-                            <span class="font-bold text-haf-blue">Note:</span> お問い合わせフォームのカテゴリーは<br>「その他」を選択し、本文に「大学SNS運用の件」とご記載ください。
+                            <span class="font-bold text-haf-blue">備考:</span> <br>お問い合わせフォームのカテゴリーは<br>「その他」を選択し、<br>本文に「大学SNS運用の件」とご記載ください。
                         </p>
                     </div>
                 </div>
