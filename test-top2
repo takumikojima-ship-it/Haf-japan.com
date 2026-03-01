@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社Human Aim Factory | 本質を引き出し、その価値を最大限に届ける</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* サービスカードの画像オーバーレイ */
+        .service-card-bg {
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover .service-card-bg {
+            transform: scale(1.1);
+        }
+        .service-card-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Header -->
+    <header id="header" class="fixed w-full z-50 transition-all duration-300 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-yellow-500 flex items-center justify-center rounded-lg font-bold text-white text-xl">H</div>
+                <span class="text-xl font-bold tracking-tighter text-white" id="logo-text">Human Aim Factory</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-white" id="nav-menu">
+                <a href="#services" class="hover:text-yellow-400 transition">サービス</a>
+                <a href="#members" class="hover:text-yellow-400 transition">メンバー</a>
+                <a href="#contact" class="bg-yellow-500 text-slate-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg text-center">お問い合わせ</a>
+            </nav>
+
+            <button class="md:hidden text-white text-2xl" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-slate-900 z-[60] flex flex-col items-center justify-center space-y-8 text-white text-2xl hidden">
+        <button id="close-menu" class="absolute top-8 right-8"><i class="fas fa-times"></i></button>
+        <a href="#services" class="mobile-link">サービス</a>
+        <a href="#members" class="mobile-link">メンバー</a>
+        <a href="#contact" class="bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-bold mobile-link">お問い合わせ</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient h-screen flex items-center justify-center relative">
+        <div class="container mx-auto px-6 text-center text-white">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                本質を引き出し、<br>
+                その価値を最大限に届ける
+            </h1>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto font-light leading-relaxed">
+                採用、ブランディング、マーケティング、そして動画表現。<br class="hidden md:block">
+                企業の「志」を可視化し、確かな成果へと繋げます。
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <a href="#services" class="w-full md:w-auto bg-yellow-500 text-slate-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 transition-all shadow-xl text-center">
+                    サービスを見る
+                </a>
+                <a href="#contact" class="w-full md:w-auto bg-white/10 backdrop-blur-md text-white border border-white/20 px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-slate-900 transition-all text-center">
+                    無料相談を予約する
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-white/50 text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Service Section -->
+    <section id="services" class="py-24 bg-slate-950 text-white overflow-hidden">
+        <div class="container mx-auto px-6 mb-16">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-start gap-8">
+                <div class="md:w-1/3">
+                    <h2 class="text-5xl md:text-6xl font-bold tracking-tight">Service</h2>
+                    <p class="text-slate-400 mt-2 font-medium">事業内容</p>
+                </div>
+                <div class="md:w-2/3">
+                    <p class="text-slate-300 text-sm md:text-lg leading-relaxed border-l-2 border-yellow-500/50 pl-6">
+                        発信をテーマに企業様の『採用』と『マーケティング』を包括的にサポートいたします。企画から制作、運用まで一貫対応し、事業成長やブランディング、採用力向上に貢献します。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Card 1: 採用支援 -->
+            <a href="service-recruitment.html" class="service-card relative h-[450px] rounded-3xl overflow-hidden group block">
+                <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=80" alt="採用支援" class="service-card-bg absolute inset-0 w-full h-full object-cover">
+                <div class="service-card-overlay absolute inset-0"></div>
+                <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end">採用支援</h3>
+                    <div class="min-h-[4rem]">
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            400社以上のプロジェクト実績。戦略設計から実務まで一気通貫で支援します。
+                        </p>
+                    </div>
+                    <div class="flex justify-end">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-yellow-500 group-hover:text-slate-900 transition-all">
+                            <i class="fas fa-arrow-right -rotate-45"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 2: 採用ブランディング -->
+            <a href="service-branding.html" class="service-card relative h-[450px] rounded-3xl overflow-hidden group block">
+                <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=600&q=80" alt="採用ブランディング" class="service-card-bg absolute inset-0 w-full h-full object-cover">
+                <div class="service-card-overlay absolute inset-0"></div>
+                <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end">採用ブランディング</h3>
+                    <div class="min-h-[4rem]">
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            SNSで「選ばれる理由」を可視化。ミスマッチのない応募獲得を実現します。
+                        </p>
+                    </div>
+                    <div class="flex justify-end">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-yellow-500 group-hover:text-slate-900 transition-all">
+                            <i class="fas fa-arrow-right -rotate-45"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 3: マーケティング支援 -->
+            <a href="service-marketing.html" class="service-card relative h-[450px] rounded-3xl overflow-hidden group block">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="マーケティング支援" class="service-card-bg absolute inset-0 w-full h-full object-cover">
+                <div class="service-card-overlay absolute inset-0"></div>
+                <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end">マーケティング支援</h3>
+                    <div class="min-h-[4rem]">
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            認知からリード獲得まで。売上に直結するデジタル戦略を構築します。
+                        </p>
+                    </div>
+                    <div class="flex justify-end">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-yellow-500 group-hover:text-slate-900 transition-all">
+                            <i class="fas fa-arrow-right -rotate-45"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 4: 動画・メディア制作 -->
+            <a href="service-video.html" class="service-card relative h-[450px] rounded-3xl overflow-hidden group block">
+                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80" alt="動画制作" class="service-card-bg absolute inset-0 w-full h-full object-cover">
+                <div class="service-card-overlay absolute inset-0"></div>
+                <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end">動画制作・メディア制作</h3>
+                    <div class="min-h-[4rem]">
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            資産になる動画を。YouTube運用からシネマティックな会社紹介まで。
+                        </p>
+                    </div>
+                    <div class="flex justify-end">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-yellow-500 group-hover:text-slate-900 transition-all">
+                            <i class="fas fa-arrow-right -rotate-45"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Members -->
+    <section id="members" class="py-24 bg-slate-900 text-white border-t border-white/5">
+        <div class="container mx-auto px-6 text-center mb-16">
+            <span class="text-yellow-500 font-bold tracking-widest uppercase text-sm">Members</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-4">共に未来を拓くメンバー</h2>
+        </div>
+        
+        <div class="container mx-auto px-6 max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="text-center">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" alt="浅香 健人" class="w-40 h-40 rounded-full mx-auto mb-6 object-cover border-4 border-yellow-500/30 shadow-2xl">
+                <h3 class="text-xl font-bold">浅香 健人</h3>
+                <p class="text-yellow-500 text-sm mb-4 font-medium">代表取締役 / 戦略・採用スペシャリスト</p>
+                <p class="text-slate-400 text-sm leading-relaxed px-4">
+                    製造現場の経験と400社以上の採用実績を持つ。現場理解に基づいた本質的な採用戦略を得意とする。
+                </p>
+            </div>
+            <div class="text-center">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="小島 拓巳" class="w-40 h-40 rounded-full mx-auto mb-6 object-cover border-4 border-yellow-500/30 shadow-2xl">
+                <h3 class="text-xl font-bold">小島 拓巳</h3>
+                <p class="text-yellow-500 text-sm mb-4 font-medium">取締役副社長 / クリエイティブ・マーケ司令塔</p>
+                <p class="text-slate-400 text-sm leading-relaxed px-4">
+                    SNSマーケティングと映像制作の専門家。企業の「見えない魅力」を映像化し、ファンを作る。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="bg-slate-50 p-8 md:p-12 rounded-[2rem] shadow-xl border border-slate-200">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold mb-4">お問い合わせ・資料請求</h2>
+                    <p class="text-slate-600 text-sm md:text-base">貴社の「本質」を届けるための第一歩を、ここから始めましょう。</p>
+                </div>
+                
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">お名前*</label>
+                            <input type="text" placeholder="田中 太郎" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">会社名*</label>
+                            <input type="text" placeholder="株式会社〇〇" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition shadow-sm">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">相談カテゴリー*</label>
+                        <select class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition shadow-sm bg-white">
+                            <option value="">選択してください</option>
+                            <option value="recruitment">採用支援について</option>
+                            <option value="branding">採用ブランディングについて</option>
+                            <option value="marketing">マーケティング支援について</option>
+                            <option value="video">動画制作・動画メディア制作について</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">メールアドレス*</label>
+                        <input type="email" placeholder="example@haf-japan.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition shadow-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">お問い合わせ内容</label>
+                        <textarea rows="4" placeholder="具体的なお悩みやご要望をご記入ください" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition shadow-sm"></textarea>
+                    </div>
+
+                    <div class="text-center mt-8">
+                        <button type="submit" class="w-full md:w-auto bg-slate-900 text-white px-12 py-4 rounded-full font-bold hover:bg-slate-800 transition shadow-xl">
+                            送信する
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-white py-12">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-2 mb-6 md:mb-0">
+                <div class="w-8 h-8 bg-yellow-500 flex items-center justify-center rounded-lg font-bold text-white text-sm">H</div>
+                <span class="text-lg font-bold tracking-tighter">Human Aim Factory</span>
+            </div>
+            <div class="text-center text-slate-500 text-xs">
+                © 2026 Human Aim Factory. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        const logoText = document.getElementById('logo-text');
+        const navMenu = document.getElementById('nav-menu');
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('bg-white', 'shadow-md', 'py-3');
+                header.classList.remove('py-4');
+                logoText.classList.replace('text-white', 'text-slate-900');
+                if (navMenu) navMenu.classList.replace('text-white', 'text-slate-600');
+                mobileBtn.classList.replace('text-white', 'text-slate-900');
+            } else {
+                header.classList.remove('bg-white', 'shadow-md', 'py-3');
+                header.classList.add('py-4');
+                logoText.classList.replace('text-slate-900', 'text-white');
+                if (navMenu) navMenu.classList.replace('text-slate-600', 'text-white');
+                mobileBtn.classList.replace('text-slate-900', 'text-white');
+            }
+        });
+
+        // Mobile Menu
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+        document.getElementById('close-menu').addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+    </script>
+</body>
+</html>
