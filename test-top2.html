@@ -16,9 +16,6 @@
 
         /* 【背景画像差し替えメモ】
            ヒーローセクションの背景画像です。
-           現在はUnsplashのサンプル画像を使用しています。
-           差し替える際は、社内の仕事風景や、洗練されたオフィス、
-           または事業を象徴する抽象的な高品質画像（1920x1080px以上）を推奨します。
         */
         .hero-gradient {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80');
@@ -47,11 +44,14 @@
             content: '';
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
             width: 30px;
             height: 2px;
             background-color: #eab308; /* yellow-500 */
+        }
+        .section-tag-center::after {
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
@@ -67,6 +67,7 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-white transition-colors duration-300" id="nav-menu">
+                <a href="#about" class="hover:text-yellow-400 transition">About</a>
                 <a href="#services" class="hover:text-yellow-400 transition">サービス</a>
                 <a href="#resources" class="hover:text-yellow-400 transition">リソース</a>
                 <a href="#members" class="hover:text-yellow-400 transition">メンバー</a>
@@ -82,6 +83,7 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 bg-slate-900 z-[60] flex flex-col items-center justify-center space-y-8 text-white text-2xl hidden">
         <button id="close-menu" class="absolute top-8 right-8"><i class="fas fa-times"></i></button>
+        <a href="#about" class="mobile-link">About</a>
         <a href="#services" class="mobile-link">サービス</a>
         <a href="#resources" class="mobile-link">リソース</a>
         <a href="#members" class="mobile-link">メンバー</a>
@@ -113,12 +115,62 @@
         </div>
     </section>
 
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white text-slate-900 border-b border-slate-100 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-16 items-center">
+                <!-- Text Area -->
+                <div class="md:w-3/5">
+                    <div class="mb-10">
+                        <h2 class="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 section-tag">About</h2>
+                    </div>
+                    
+                    <div class="space-y-8 text-slate-700 leading-relaxed text-base md:text-lg">
+                        <p>
+                            優れた技術やサービス、強い想いを持っているにもかかわらず、<br class="hidden md:block">
+                            それを正しく伝えるための戦略やクリエイティブが不足していることで、本来得られるはずの機会を逃している企業は少なくありません。<br>
+                            この課題は、採用でもマーケティングでも共通しています。
+                        </p>
+                        
+                        <p class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                            人材が集まらない。価値が選ばれない。
+                        </p>
+                        
+                        <p>
+                            その多くは「実力不足」ではなく、「伝達設計の不足」によって起きています。<br>
+                            Human Aim Factoryは、採用・マーケティング・クリエイティブを横断し、<br class="hidden md:block">
+                            企業の本質的な価値を構造化し、適切な戦略と表現で届けるプロフェッショナルチームです。
+                        </p>
+                        
+                        <p>
+                            企業が持つ本質的な魅力を最大限に引き出し、<br class="hidden md:block">
+                            それぞれの企業が実現したい未来を共に形にしていく。<br>
+                            私たちは、その最高のパートナーであり続けることを目指しています。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Image Area -->
+                <div class="md:w-2/5 w-full relative">
+                    <!-- 【画像差し替えメモ】
+                         会社を象徴するビジュアルを差し替えてください。
+                    -->
+                    <div class="aspect-square bg-slate-50 rounded-[3rem] overflow-hidden shadow-2xl relative border border-slate-100 group">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Team Work" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <!-- Decorative Shapes -->
+                        <div class="absolute top-10 right-10 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl animate-pulse"></div>
+                        <div class="absolute bottom-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl animate-pulse delay-700"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Service Section -->
     <section id="services" class="py-24 bg-slate-50 text-slate-900 border-b border-slate-200">
         <div class="container mx-auto px-6 mb-16">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-start gap-8">
                 <div class="md:w-1/3">
-                    <!-- セクション見出し: 被りを解消し目立つ色に調整 -->
                     <h2 class="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 section-tag">Service</h2>
                 </div>
                 <div class="md:w-2/3">
@@ -130,15 +182,12 @@
         </div>
 
         <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-            
             <!-- Card 1: 採用支援 -->
-            <!-- 【リンク設定メモ】詳細ページURLに差し替えてください -->
             <a href="https://haf-japan.com/" class="service-card relative h-[450px] rounded-3xl overflow-hidden group block shadow-xl shadow-slate-200">
-                <!-- 【画像差し替えメモ】採用支援をイメージする画像（面談風景、チームワークなど）を src に入れてください -->
                 <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=80" alt="採用支援" class="service-card-bg absolute inset-0 w-full h-full object-cover">
                 <div class="service-card-overlay absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"></div>
                 <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end text-white text-left">
-                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end">採用支援</h3>
+                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end text-white">採用支援</h3>
                     <div class="min-h-[4rem]">
                         <p class="text-slate-200 text-xs leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             400社以上のプロジェクト実績。戦略設計から実務まで一気通貫で支援します。
@@ -153,13 +202,11 @@
             </a>
 
             <!-- Card 2: 採用ブランディング -->
-            <!-- 【リンク設定メモ】詳細ページURLに差し替えてください -->
             <a href="https://haf-japan.com/" class="service-card relative h-[450px] rounded-3xl overflow-hidden group block shadow-xl shadow-slate-200">
-                <!-- 【画像差し替えメモ】SNSや広報をイメージする画像（スマホ操作、撮影風景など）を src に入れてください -->
                 <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=600&q=80" alt="採用ブランディング" class="service-card-bg absolute inset-0 w-full h-full object-cover">
                 <div class="service-card-overlay absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"></div>
                 <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end text-white text-left">
-                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end">採用ブランディング</h3>
+                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end text-white">採用ブランディング</h3>
                     <div class="min-h-[4rem]">
                         <p class="text-slate-200 text-xs leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             SNSで「選ばれる理由」を可視化。ミスマッチのない応募獲得を実現します。
@@ -174,13 +221,11 @@
             </a>
 
             <!-- Card 3: マーケティング支援 -->
-            <!-- 【リンク設定メモ】詳細ページURLに差し替えてください -->
             <a href="https://haf-japan.com/" class="service-card relative h-[450px] rounded-3xl overflow-hidden group block shadow-xl shadow-slate-200">
-                <!-- 【画像差し替えメモ】分析や戦略をイメージする画像（グラフ、PC、会議など）を src に入れてください -->
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="マーケティング支援" class="service-card-bg absolute inset-0 w-full h-full object-cover">
                 <div class="service-card-overlay absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"></div>
                 <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end text-white text-left">
-                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end">マーケティング支援</h3>
+                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end text-white">マーケティング支援</h3>
                     <div class="min-h-[4rem]">
                         <p class="text-slate-200 text-xs leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             認知からリード獲得まで。売上に直結するデジタル戦略を構築します。
@@ -195,13 +240,11 @@
             </a>
 
             <!-- Card 4: 動画・メディア制作 -->
-            <!-- 【リンク設定メモ】詳細ページURLに差し替えてください -->
             <a href="https://haf-japan.com/" class="service-card relative h-[450px] rounded-3xl overflow-hidden group block shadow-xl shadow-slate-200">
-                <!-- 【画像差し替えメモ】映像制作をイメージする画像（カメラ、撮影、編集画面など）を src に入れてください -->
                 <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80" alt="動画制作" class="service-card-bg absolute inset-0 w-full h-full object-cover">
                 <div class="service-card-overlay absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"></div>
                 <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end text-white text-left">
-                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end">動画制作・メディア制作</h3>
+                    <h3 class="text-lg md:text-xl font-bold mb-3 leading-snug min-h-[3.5rem] flex items-end text-white">動画制作・メディア制作</h3>
                     <div class="min-h-[4rem]">
                         <p class="text-slate-200 text-xs leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             資産になる動画を。YouTube運用からシネマティックな会社紹介まで。
@@ -220,7 +263,7 @@
     <!-- Resources Section -->
     <section id="resources" class="py-24 bg-white overflow-hidden border-b border-slate-200">
         <div class="container mx-auto px-6 mb-16 text-center">
-            <span class="text-yellow-600 font-bold tracking-widest uppercase text-xs section-tag">Knowledge & Resources</span>
+            <span class="text-yellow-600 font-bold tracking-widest uppercase text-xs section-tag section-tag-center">Knowledge & Resources</span>
             <h2 class="text-3xl md:text-4xl font-bold mt-4">価値ある知見を、すべての企業へ</h2>
             <p class="text-slate-500 mt-6 max-w-2xl mx-auto leading-relaxed text-sm md:text-base text-center">
                 企業の皆様のお困りごとに応じた課題解決ナレッジを無料で発信しています。<br class="hidden md:block">
@@ -232,7 +275,6 @@
             <!-- Whitepaper Card -->
             <a href="https://haf-japan.com/whitepaper/" class="flex flex-col md:flex-row bg-slate-50 rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 border border-slate-100">
                 <div class="md:w-1/2 overflow-hidden h-64 md:h-auto text-left">
-                    <!-- 【画像差し替えメモ】ホワイトペーパーの表紙や、資料をめくっている画像を src に入れてください -->
                     <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80" alt="Whitepaper" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                 </div>
                 <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center text-left">
@@ -250,7 +292,6 @@
             <!-- Blog Card -->
             <a href="https://haf-japan.com/blog/" class="flex flex-col md:flex-row bg-slate-50 rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 border border-slate-100">
                 <div class="md:w-1/2 overflow-hidden h-64 md:h-auto text-left">
-                    <!-- 【画像差し替えメモ】ブログやニュースをイメージする画像を src に入れてください -->
                     <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80" alt="Blog" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                 </div>
                 <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center text-left">
@@ -270,7 +311,7 @@
     <!-- Members -->
     <section id="members" class="py-24 bg-slate-50 text-slate-900 border-b border-slate-200">
         <div class="container mx-auto px-6 text-center mb-16">
-            <span class="text-yellow-600 font-bold tracking-widest uppercase text-xs section-tag">Members</span>
+            <span class="text-yellow-600 font-bold tracking-widest uppercase text-xs section-tag section-tag-center">Members</span>
             <h2 class="text-3xl md:text-4xl font-bold mt-4 text-center">共に未来を拓くメンバー</h2>
         </div>
         
@@ -278,7 +319,6 @@
             <!-- CEO: 浅香 健人 -->
             <div class="text-center group">
                 <div class="relative inline-block mb-8">
-                    <!-- 【画像差し替えメモ】浅香さんのプロフィール写真（正方形推奨）を src に入れてください -->
                     <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" alt="浅香 健人" class="w-48 h-48 rounded-full mx-auto object-cover border-4 border-white shadow-xl transition-transform duration-500 group-hover:scale-105">
                     <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white shadow-lg">
                         <i class="fas fa-quote-right text-xs"></i>
@@ -286,14 +326,13 @@
                 </div>
                 <h3 class="text-2xl font-bold mb-2 text-slate-900">浅香 健人</h3>
                 <p class="text-yellow-600 text-sm mb-6 font-bold tracking-wider uppercase">CEO / Recruitment Specialist</p>
-                <p class="text-slate-600 text-sm leading-relaxed px-4">
+                <p class="text-slate-600 text-sm leading-relaxed px-4 text-center">
                     製造現場の経験と400社以上の採用実績を持つ。現場理解に基づいた本質的な採用戦略と実行支援を得意とする。
                 </p>
             </div>
             <!-- VP: 小島 拓巳 -->
             <div class="text-center group">
                 <div class="relative inline-block mb-8">
-                    <!-- 【画像差し替えメモ】小島さんのプロフィール写真（正方形推奨）を src に入れてください -->
                     <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="小島 拓巳" class="w-48 h-48 rounded-full mx-auto object-cover border-4 border-white shadow-xl transition-transform duration-500 group-hover:scale-105">
                     <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white shadow-lg">
                         <i class="fas fa-quote-right text-xs"></i>
@@ -301,7 +340,7 @@
                 </div>
                 <h3 class="text-2xl font-bold mb-2 text-slate-900">小島 拓巳</h3>
                 <p class="text-yellow-600 text-sm mb-6 font-bold tracking-wider uppercase">Vice President / Creative & Marketing</p>
-                <p class="text-slate-600 text-sm leading-relaxed px-4">
+                <p class="text-slate-600 text-sm leading-relaxed px-4 text-center">
                     SNSマーケティングと映像制作の専門家。企業の「見えない魅力」をシネマティックな映像として可視化し、ファンを作る。
                 </p>
             </div>
@@ -313,7 +352,7 @@
         <div class="container mx-auto px-6 max-w-4xl text-center">
             <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-2xl shadow-slate-200 border border-slate-100">
                 <div class="text-center mb-10 text-slate-900">
-                    <span class="text-yellow-600 font-bold tracking-widest uppercase text-xs section-tag mb-4">Contact</span>
+                    <span class="text-yellow-600 font-bold tracking-widest uppercase text-xs section-tag section-tag-center mb-4">Contact</span>
                     <h2 class="text-3xl font-bold mb-4">お問い合わせ・資料請求</h2>
                     <p class="text-slate-500 text-sm md:text-base">貴社の「本質」を届けるための第一歩を、ここから始めましょう。</p>
                 </div>
@@ -371,6 +410,7 @@
                     <span class="text-lg font-bold tracking-tighter">Human Aim Factory</span>
                 </div>
                 <div class="flex space-x-12 text-sm font-medium text-slate-600 text-left">
+                    <a href="#about" class="hover:text-yellow-600 transition">About</a>
                     <a href="#services" class="hover:text-yellow-600 transition">サービス</a>
                     <a href="#resources" class="hover:text-yellow-400 transition">リソース</a>
                     <a href="#members" class="hover:text-yellow-600 transition">メンバー</a>
