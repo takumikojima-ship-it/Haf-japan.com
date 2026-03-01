@@ -44,6 +44,7 @@
             
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-white" id="nav-menu">
                 <a href="#services" class="hover:text-yellow-400 transition">サービス</a>
+                <a href="#resources" class="hover:text-yellow-400 transition">リソース</a>
                 <a href="#members" class="hover:text-yellow-400 transition">メンバー</a>
                 <a href="#contact" class="bg-yellow-500 text-slate-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg text-center">お問い合わせ</a>
             </nav>
@@ -58,6 +59,7 @@
     <div id="mobile-menu" class="fixed inset-0 bg-slate-900 z-[60] flex flex-col items-center justify-center space-y-8 text-white text-2xl hidden">
         <button id="close-menu" class="absolute top-8 right-8"><i class="fas fa-times"></i></button>
         <a href="#services" class="mobile-link">サービス</a>
+        <a href="#resources" class="mobile-link">リソース</a>
         <a href="#members" class="mobile-link">メンバー</a>
         <a href="#contact" class="bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-bold mobile-link">お問い合わせ</a>
     </div>
@@ -176,6 +178,54 @@
                         <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-yellow-500 group-hover:text-slate-900 transition-all">
                             <i class="fas fa-arrow-right -rotate-45"></i>
                         </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="py-24 bg-white overflow-hidden border-b border-slate-100">
+        <div class="container mx-auto px-6 mb-16 text-center">
+            <span class="text-yellow-600 font-bold tracking-widest uppercase text-sm">Knowledge & Resources</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-4">価値ある知見を、すべての企業へ</h2>
+            <p class="text-slate-500 mt-6 max-w-2xl mx-auto leading-relaxed">
+                企業の皆様のお困りごとに応じた課題解決ナレッジを無料で発信しています。<br class="hidden md:block">
+                現場で培った実践的なノウハウをぜひご活用ください。
+            </p>
+        </div>
+
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Whitepaper Promotion Card -->
+            <a href="https://haf-japan.com/whitepaper/" class="flex flex-col md:flex-row bg-slate-50 rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-500 border border-slate-100">
+                <div class="md:w-1/2 overflow-hidden h-64 md:h-auto">
+                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80" alt="Whitepaper" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
+                    <div class="inline-block bg-yellow-500 text-slate-900 text-[10px] font-bold px-3 py-1 rounded-full mb-4 w-max uppercase tracking-wider">Whitepaper</div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 leading-tight">お役立ち資料</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                        製造業採用のノウハウを凝縮。明日から使える実践的な限定資料を無料で公開中。
+                    </p>
+                    <div class="flex items-center text-yellow-600 font-bold group-hover:translate-x-2 transition-transform">
+                        資料一覧を見る <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Blog Promotion Card -->
+            <a href="https://haf-japan.com/blog/" class="flex flex-col md:flex-row bg-slate-50 rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 border border-slate-100">
+                <div class="md:w-1/2 overflow-hidden h-64 md:h-auto">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80" alt="Blog" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
+                    <div class="inline-block bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-full mb-4 w-max uppercase tracking-wider">Blog & Tips</div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 leading-tight">役立つノウハウ記事</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                        採用・マーケティングの最新トレンドを定期発信。プロの視点で課題解決をガイドします。
+                    </p>
+                    <div class="flex items-center text-blue-600 font-bold group-hover:translate-x-2 transition-transform">
+                        ブログを読む <i class="fas fa-chevron-right ml-2 text-xs"></i>
                     </div>
                 </div>
             </a>
