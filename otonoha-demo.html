@@ -1,0 +1,560 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Heart, 
+  Clock, 
+  Home, 
+  ShieldCheck, 
+  ChevronRight, 
+  Menu, 
+  X, 
+  Calendar,
+  Phone,
+  ArrowRight,
+  Plus,
+  Minus
+} from 'lucide-react';
+
+// --- Components ---
+
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header 
+      className={`fixed w-full z-50 transition-all duration-500 ${
+        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#EFE8E1] py-4' : 'bg-transparent py-8'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        {/* Logo */}
+        <div className="flex items-center">
+          <span className={`font-serif text-xl md:text-2xl font-light tracking-[0.2em] ${isScrolled ? 'text-[#4A3F35]' : 'text-[#4A3F35]'}`}>
+            オトノハクリニック
+          </span>
+          <span className="ml-5 text-[10px] tracking-[0.3em] text-[#C19A98] hidden md:block mt-1 uppercase">
+            Maternity Visiting Echo
+          </span>
+        </div>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center space-x-10">
+          {['コンセプト', '特徴', '料金プラン', 'コラム', 'FAQ'].map((item) => (
+            <a key={item} href={`#${item}`} className="text-xs font-light tracking-[0.15em] text-[#4A3F35] hover:text-[#C19A98] transition-colors">
+              {item}
+            </a>
+          ))}
+          <button className="bg-[#C19A98] text-white px-8 py-3.5 text-xs tracking-[0.15em] flex items-center hover:bg-[#A88280] transition-colors">
+            ご予約・お問い合わせ
+          </button>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden text-[#4A3F35]"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} strokeWidth={1} /> : <Menu size={24} strokeWidth={1} />}
+        </button>
+      </div>
+
+      {/* Mobile Nav */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-[#EFE8E1] shadow-lg pb-8">
+          <div className="flex flex-col px-6 pt-4 pb-4 space-y-0">
+             {['コンセプト', '特徴', '料金プラン', 'コラム', 'FAQ'].map((item) => (
+              <a 
+                key={item} 
+                href={`#${item}`} 
+                className="block py-5 text-sm font-light tracking-[0.2em] text-[#4A3F35] border-b border-[#F5F0EB]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item}
+              </a>
+            ))}
+            <div className="mt-8">
+              <button className="w-full bg-[#4A3F35] text-white px-6 py-4 text-xs tracking-[0.2em] flex justify-center items-center">
+                ご予約はこちら
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
+
+const Hero = () => {
+  return (
+    <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: 'url("https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=2000&auto=format&fit=crop")',
+        }}
+      >
+        <div className="absolute inset-0 bg-white/50 md:bg-gradient-to-r md:from-white/90 md:to-white/20"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-16">
+        <div className="max-w-2xl">
+          <h2 className="text-[#C19A98] text-xs font-medium tracking-[0.4em] mb-8 uppercase">
+            Maternity Visiting Echo
+          </h2>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#4A3F35] leading-[1.3] mb-10 font-light tracking-[0.1em]">
+            ご自宅が、<br />
+            特別なエコー室に。
+          </h1>
+          <p className="text-sm md:text-base text-[#7A6F66] leading-[2.6] mb-12 tracking-[0.15em] font-light">
+            ご家族皆様でリラックスして迎える、<br className="hidden md:block" />
+            お腹の赤ちゃんとのかけがえのない時間。<br />
+            上質なエコー体験を、あなたのお部屋へお届けします。
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6">
+            <button className="group border border-[#4A3F35] text-[#4A3F35] bg-transparent hover:bg-[#4A3F35] hover:text-white px-10 py-5 tracking-[0.2em] text-xs transition-all duration-300 flex items-center justify-center">
+              サービス詳細を見る
+              <ArrowRight size={14} className="ml-3 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Concept = () => {
+  return (
+    <section id="コンセプト" className="py-32 md:py-48 bg-[#FCF9F6]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mb-20">
+          <span className="text-[#C19A98] text-xs tracking-[0.3em] uppercase">Concept</span>
+          <h2 className="text-3xl md:text-4xl font-serif text-[#4A3F35] mt-6 tracking-[0.15em] font-light">オトノハクリニックの想い</h2>
+          {/* 高級感を出す縦のライン */}
+          <div className="w-px h-16 bg-[#E8DFD8] mx-auto mt-12"></div>
+        </div>
+
+        <div className="max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-[#4A3F35] leading-[2.8] font-serif font-light mb-20 tracking-[0.15em]">
+            クリニックの限られた時間ではなく、<br />
+            一番安心できる場所で、赤ちゃんの成長を感じてほしい。<br />
+            <br />
+            上のお子様と一緒に。お仕事から帰られたご主人と。<br />
+            あるいは、遠方から来られたご祖父母様も交えて。<br />
+            <br />
+            私たちは最新のポータブルエコー機器と、<br />
+            熟練の技術、そしてホスピタリティを持って、<br />
+            皆様の特別な瞬間をプロデュースいたします。
+          </p>
+          <div className="relative">
+            <img 
+              src="https://images.unsplash.com/photo-1590086782957-93c06343e37c?q=80&w=1200&auto=format&fit=crop" 
+              alt="" 
+              className="w-full h-auto object-cover max-w-4xl mx-auto"
+            />
+            {/* 装飾的な枠線 */}
+            <div className="hidden md:block absolute -inset-4 border border-[#EFE8E1] z-[-1] max-w-4xl mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Features = () => {
+  const features = [
+    {
+      icon: <Home size={40} strokeWidth={1} />,
+      title: "プライベート空間",
+      desc: "移動の負担や待ち時間がなく、感染症のリスクも軽減。ご自身のベッドやソファで、一番リラックスした状態でエコーをご覧いただけます。"
+    },
+    {
+      icon: <Heart size={40} strokeWidth={1} />,
+      title: "ご家族との共有",
+      desc: "人数制限のあるクリニックとは異なり、上のお子様やご両親など、大切な方々皆様と一緒に赤ちゃんの様子を見守ることができます。"
+    },
+    {
+      icon: <ShieldCheck size={40} strokeWidth={1} />,
+      title: "確かな医療技術",
+      desc: "産婦人科での経験豊富な臨床検査技師が訪問。最新のポータブル機器を持参し、鮮明な映像と丁寧な説明をご提供いたします。"
+    }
+  ];
+
+  return (
+    <section id="特徴" className="py-32 md:py-40 bg-white border-t border-[#F5F0EB]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-24">
+          <span className="text-[#C19A98] text-xs tracking-[0.3em] uppercase">Features</span>
+          <h2 className="text-3xl md:text-4xl font-serif text-[#4A3F35] mt-6 tracking-[0.15em] font-light">選ばれる理由</h2>
+          <div className="w-px h-16 bg-[#E8DFD8] mx-auto mt-12"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
+          {features.map((feature, index) => (
+            <div key={index} className="text-center">
+              <div className="text-[#C19A98] mb-10 flex justify-center">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-serif text-[#4A3F35] mb-6 tracking-[0.15em] font-light">{feature.title}</h3>
+              <p className="text-[#7A6F66] leading-[2.4] text-sm tracking-[0.1em] text-justify font-light">
+                {feature.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Pricing = () => {
+  const plans = [
+    {
+      name: "Standard Plan",
+      jpName: "スタンダードプラン",
+      price: "33,000",
+      time: "約45分",
+      features: [
+        "2D / 3D / 4Dエコー撮影",
+        "エコー動画・静止画データお渡し（クラウド共有）",
+        "ご家族の同席可能（人数制限なし）",
+        "出張費・交通費（指定エリア内に限る）"
+      ]
+    },
+    {
+      name: "Premium Plan",
+      jpName: "プレミアムプラン",
+      price: "55,000",
+      time: "約90分",
+      features: [
+        "スタンダードプランの全内容",
+        "助産師によるマタニティ相談・ケア（30分）",
+        "記念エコーフォトブック作成（後日郵送）",
+        "オリジナルエコー動画編集（BGM付き）"
+      ]
+    }
+  ];
+
+  return (
+    <section id="料金プラン" className="py-32 md:py-48 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-24">
+          <span className="text-[#C19A98] text-xs tracking-[0.3em] uppercase">Pricing</span>
+          <h2 className="text-3xl md:text-4xl font-serif text-[#4A3F35] mt-6 tracking-[0.15em] font-light">料金・プラン</h2>
+          <div className="w-px h-16 bg-[#E8DFD8] mx-auto mt-12"></div>
+        </div>
+
+        <div className="space-y-0 border-t border-[#EFE8E1]">
+          {plans.map((plan, index) => (
+            <div key={index} className="flex flex-col md:flex-row py-12 md:py-16 border-b border-[#EFE8E1]">
+              {/* Left: Plan Name & Price */}
+              <div className="md:w-1/2 md:pr-12 mb-10 md:mb-0 flex flex-col justify-center">
+                <h3 className="text-[#C19A98] text-[10px] tracking-[0.3em] uppercase mb-4">{plan.name}</h3>
+                <h4 className="text-2xl md:text-3xl font-serif text-[#4A3F35] mb-8 tracking-[0.15em] font-light">{plan.jpName}</h4>
+                <div className="flex items-baseline gap-3">
+                  <span className="text-4xl md:text-5xl font-serif text-[#4A3F35] tracking-wider font-light">¥{plan.price}</span>
+                  <span className="text-xs text-[#7A6F66] tracking-[0.2em] font-light">(税込)</span>
+                </div>
+                <div className="mt-8 text-xs text-[#7A6F66] tracking-[0.15em] font-light flex items-center">
+                  <Clock size={14} className="mr-3" strokeWidth={1} />
+                  所要時間: {plan.time}
+                </div>
+              </div>
+
+              {/* Right: Features List */}
+              <div className="md:w-1/2 md:pl-16 md:border-l border-[#EFE8E1] flex flex-col justify-center">
+                <ul className="space-y-6">
+                  {plan.features.map((feature, fIndex) => (
+                    <li key={fIndex} className="flex items-start text-[#4A3F35] text-sm tracking-[0.1em] font-light leading-relaxed">
+                      <div className="w-1 h-1 bg-[#C19A98] rounded-full mr-5 mt-2.5 shrink-0"></div>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Notes */}
+        <div className="mt-20 text-left bg-[#FCF9F6] p-8 md:p-10 border border-[#EFE8E1]">
+          <p className="text-xs text-[#7A6F66] tracking-[0.15em] leading-[2.6] font-light">
+            ※ 記載の料金はすべて税込価格です。<br />
+            ※ 指定エリア外への出張につきましては、別途交通費を頂戴する場合がございます。<br />
+            ※ 当サービスは医療行為（診断など）を目的としたものではございません。予めご了承ください。
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const FAQ = () => {
+  const [openIndex, setOpenIndex] = useState(0); // 最初のアイテムだけ開いておく
+
+  const faqs = [
+    {
+      q: "自宅で準備するものはありますか？",
+      a: "エコー機器を置くための小さなスペースと、コンセントを1口お借りいたします。ベッドやソファなど、妊婦様が一番リラックスして横になれる場所へご案内ください。お腹に塗布するジェルや、拭き取り用のホットタオルなどはすべて当院でご用意しております。"
+    },
+    {
+      q: "部屋があまり広くないのですが、検査は可能ですか？",
+      a: "はい、問題ございません。使用する最新のポータブルエコー機器はノートパソコンほどのコンパクトなサイズです。ベッドサイドやソファの脇に人が1人座れるスペースがあれば、十分に検査が可能です。"
+    },
+    {
+      q: "上の子やペットが同席しても良いですか？",
+      a: "もちろん大歓迎です。ご家族皆様で赤ちゃんの様子をご覧いただけるのが、訪問エコー最大のメリットです。ペットに関しても同席可能ですが、精密機器やケーブルがございますので、検査中の安全にはご配慮いただけますと幸いです。"
+    },
+    {
+      q: "エコーで性別の判定や、異常（病気）の診断はしてもらえますか？",
+      a: "当サービスは「ご家族で赤ちゃんの成長を見て、絆を深めていただくこと」を目的としたコミュニケーションサービスです。医療行為（診断・診療）は行っておりませんので、性別の確定や、異常の有無についての医学的なお答えはできかねます。あらかじめご了承くださいませ。"
+    },
+    {
+      q: "出張可能なエリアを教えてください。",
+      a: "現在は東京都内23区を中心に訪問しております。近郊エリア（神奈川県・埼玉県・千葉県の一部）へのご訪問も承っておりますが、別途追加の出張費を頂戴する場合がございます。詳しいエリアや費用については、LINEまたはフォームよりお気軽にご相談ください。"
+    },
+    {
+      q: "支払いはどのような方法がありますか？",
+      a: "事前のクレジットカード決済、または当日の現金払い、各種QRコード決済（PayPayなど）に対応しております。領収書の発行も可能ですので、ご希望の方はお申し付けください。"
+    }
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section id="FAQ" className="py-32 md:py-48 bg-[#FCF9F6] border-t border-[#EFE8E1]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-24">
+          <span className="text-[#C19A98] text-xs tracking-[0.3em] uppercase">FAQ</span>
+          <h2 className="text-3xl md:text-4xl font-serif text-[#4A3F35] mt-6 tracking-[0.15em] font-light">よくあるご質問</h2>
+          <div className="w-px h-16 bg-[#E8DFD8] mx-auto mt-12"></div>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div 
+              key={index} 
+              className="bg-white border border-[#EFE8E1] overflow-hidden transition-all duration-300"
+            >
+              <button
+                className="w-full text-left px-6 py-8 md:px-10 flex justify-between items-center focus:outline-none group"
+                onClick={() => toggleFAQ(index)}
+              >
+                <div className="flex items-start pr-8">
+                  <span className="text-[#C19A98] font-serif text-xl mr-6 font-light leading-none mt-1">Q.</span>
+                  <span className="text-[#4A3F35] text-sm md:text-base tracking-[0.1em] font-light leading-relaxed group-hover:text-[#C19A98] transition-colors">
+                    {faq.q}
+                  </span>
+                </div>
+                <div className="text-[#C19A98] shrink-0 transition-transform duration-300">
+                  {openIndex === index ? (
+                    <Minus size={20} strokeWidth={1} />
+                  ) : (
+                    <Plus size={20} strokeWidth={1} />
+                  )}
+                </div>
+              </button>
+              
+              <div 
+                className={`transition-all duration-500 ease-in-out ${
+                  openIndex === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="px-6 pb-8 pt-2 md:px-10 md:pl-[5.5rem] border-t border-[#FAFAFA]">
+                  <div className="flex items-start">
+                    <span className="text-[#E8DFD8] font-serif text-xl mr-6 font-light leading-none mt-1 hidden md:block">A.</span>
+                    <p className="text-[#7A6F66] text-sm tracking-[0.1em] font-light leading-[2.4]">
+                      {faq.a}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CTA = () => {
+  return (
+    <section className="bg-[#4A3F35] py-32">
+      <div className="max-w-4xl mx-auto px-4 text-center">
+        <h2 className="text-3xl md:text-4xl font-serif text-white mb-8 tracking-[0.15em] font-light leading-relaxed">
+          特別な瞬間を、ご自宅で。
+        </h2>
+        <p className="text-[#D2C9C0] mb-16 text-sm md:text-base leading-[2.4] tracking-[0.15em] font-light">
+          ご予約前の不安な点やご質問など、LINEやフォームからお気軽にお問い合わせください。<br className="hidden md:block"/>
+          専門スタッフが丁寧にお答えいたします。
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-6">
+          <button className="bg-[#06C755] text-white px-10 py-5 tracking-[0.2em] text-sm font-light hover:bg-[#05b34c] transition-colors flex items-center justify-center">
+            LINEで無料相談・予約
+          </button>
+          <button className="bg-transparent text-white border border-white px-10 py-5 tracking-[0.2em] text-sm font-light hover:bg-white hover:text-[#4A3F35] transition-colors flex items-center justify-center">
+            WEBフォームから予約
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Column = () => {
+  const columns = [
+    {
+      category: "News",
+      date: "2026.03.15",
+      title: "春の特別キャンペーンのご案内",
+      image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      category: "Knowledge",
+      date: "2026.03.01",
+      title: "4Dエコーが一番綺麗に見える時期は？",
+      image: "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      category: "Voice",
+      date: "2026.02.20",
+      title: "「上の子と一緒に赤ちゃんと対面できました」",
+      image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop"
+    }
+  ];
+
+  return (
+    <section id="コラム" className="py-32 bg-[#FCF9F6]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16">
+          <div className="text-center md:text-left mb-6 md:mb-0">
+            <span className="text-[#C19A98] text-xs tracking-[0.3em] uppercase">Information</span>
+            <h2 className="text-3xl font-serif text-[#4A3F35] mt-4 tracking-[0.15em] font-light">お知らせ・コラム</h2>
+          </div>
+          <a href="#" className="hidden md:flex items-center text-xs tracking-[0.2em] text-[#C19A98] hover:text-[#4A3F35] transition-colors uppercase">
+            View All <ChevronRight size={14} className="ml-2" />
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {columns.map((col, index) => (
+            <article key={index} className="group cursor-pointer">
+              <div className="relative aspect-[4/3] overflow-hidden mb-6">
+                <img 
+                  src={col.image} 
+                  alt={col.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
+                />
+              </div>
+              <div>
+                <div className="flex items-center gap-4 mb-3">
+                  <span className="text-[#C19A98] text-[10px] tracking-[0.2em] uppercase border border-[#C19A98] px-2 py-1">{col.category}</span>
+                  <span className="text-xs text-[#9E938A] tracking-[0.1em] font-light">{col.date}</span>
+                </div>
+                <h3 className="text-base font-serif text-[#4A3F35] leading-relaxed group-hover:text-[#C19A98] transition-colors tracking-wide">
+                  {col.title}
+                </h3>
+              </div>
+            </article>
+          ))}
+        </div>
+        
+        <div className="mt-16 text-center md:hidden">
+          <a href="#" className="inline-flex items-center text-xs tracking-[0.2em] text-[#4A3F35] border-b border-[#4A3F35] pb-1 uppercase">
+            View All <ChevronRight size={14} className="ml-2" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Footer = () => {
+  return (
+    <footer className="bg-white border-t border-[#EFE8E1] py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-12">
+          
+          {/* Brand */}
+          <div className="col-span-1 lg:col-span-1">
+            <div className="font-serif text-2xl font-light tracking-[0.2em] text-[#4A3F35] mb-3">オトノハクリニック</div>
+            <p className="text-[10px] tracking-[0.2em] text-[#C19A98] mb-10 uppercase">Maternity Visiting Echo</p>
+            <div className="flex items-center space-x-3 text-sm text-[#7A6F66] mb-4 font-light tracking-wider">
+              <Phone size={14} strokeWidth={1.5} />
+              <span>03-0000-0000</span>
+            </div>
+            <div className="flex items-center space-x-3 text-sm text-[#7A6F66] font-light tracking-wider">
+              <Clock size={14} strokeWidth={1.5} />
+              <span>10:00 - 18:00 (不定休)</span>
+            </div>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h4 className="text-xs font-medium tracking-[0.2em] text-[#4A3F35] mb-8 uppercase">Menu</h4>
+            <ul className="space-y-5 text-sm text-[#7A6F66] font-light tracking-wider">
+              <li><a href="#" className="hover:text-[#C19A98] transition-colors">トップページ</a></li>
+              <li><a href="#コンセプト" className="hover:text-[#C19A98] transition-colors">コンセプト</a></li>
+              <li><a href="#特徴" className="hover:text-[#C19A98] transition-colors">選ばれる理由</a></li>
+              <li><a href="#料金プラン" className="hover:text-[#C19A98] transition-colors">料金・プラン</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-medium tracking-[0.2em] text-[#4A3F35] mb-8 uppercase">Information</h4>
+            <ul className="space-y-5 text-sm text-[#7A6F66] font-light tracking-wider">
+              <li><a href="#コラム" className="hover:text-[#C19A98] transition-colors">お知らせ・コラム</a></li>
+              <li><a href="#" className="hover:text-[#C19A98] transition-colors">よくあるご質問</a></li>
+              <li><a href="#" className="hover:text-[#C19A98] transition-colors">訪問対応エリア</a></li>
+              <li><a href="#" className="hover:text-[#C19A98] transition-colors">お問い合わせ</a></li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="text-xs font-medium tracking-[0.2em] text-[#4A3F35] mb-8 uppercase">About Us</h4>
+            <ul className="space-y-5 text-sm text-[#7A6F66] font-light tracking-wider">
+              <li><a href="#" className="hover:text-[#C19A98] transition-colors">運営会社</a></li>
+              <li><a href="#" className="hover:text-[#C19A98] transition-colors">特定商取引法に基づく表記</a></li>
+              <li><a href="#" className="hover:text-[#C19A98] transition-colors">プライバシーポリシー</a></li>
+              <li><a href="#" className="hover:text-[#C19A98] transition-colors">利用規約</a></li>
+            </ul>
+          </div>
+
+        </div>
+        
+        <div className="mt-24 pt-8 border-t border-[#F5F0EB] text-center text-[10px] text-[#9E938A] tracking-[0.2em] uppercase">
+          &copy; {new Date().getFullYear()} Otonoha Clinic. All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default function App() {
+  return (
+    <div className="font-sans text-[#4A3F35] antialiased selection:bg-[#C19A98] selection:text-white">
+      <Navbar />
+      <main>
+        <Hero />
+        <Concept />
+        <Features />
+        <Pricing />
+        <FAQ />
+        <CTA />
+        <Column />
+      </main>
+      <Footer />
+    </div>
+  );
+}
