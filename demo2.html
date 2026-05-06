@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RECRUIT | 株式会社テンプレート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       CSS VARIABLES
+    ============================================================ */
+    :root {
+      --gold: #b8960c;
+      --gold-light: #d4ac20;
+      --red: #c0392b;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --gray-light: #e8e5de;
+      --nav-width: 160px;
+      --logo-width: 120px;
+      --sp: 24px;   /* mobile side padding */
+    }
+
+    /* ============================================================
+       DESKTOP: FIXED LEFT LOGO
+    ============================================================ */
+    .site-logo {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--logo-width);
+      height: 100vh;
+      z-index: 200;
+      display: flex;
+      align-items: flex-start;
+      padding: 28px 20px;
+      pointer-events: none;
+    }
+    .site-logo a {
+      pointer-events: all;
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      line-height: 1.8;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+
+    /* ============================================================
+       DESKTOP: FIXED RIGHT SIDEBAR NAV
+    ============================================================ */
+    .side-nav {
+      position: fixed;
+      top: 0; right: 0;
+      width: var(--nav-width);
+      height: 100vh;
+      z-index: 200;
+      background: rgba(10,10,10,0.96);
+      border-left: 1px solid #222;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .side-nav-top { flex-shrink: 0; }
+    .side-nav .btn-recruitment {
+      display: block;
+      background: var(--gold);
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 14px 10px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .side-nav .btn-recruitment:hover { background: var(--gold-light); }
+    .side-nav .btn-corporate {
+      display: block;
+      color: #aaa;
+      text-decoration: none;
+      font-size: 11px;
+      padding: 10px 14px;
+      text-align: center;
+      border-bottom: 1px solid #222;
+      transition: color 0.2s;
+    }
+    .side-nav .btn-corporate:hover { color: #fff; }
+    .lang-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-bottom: 1px solid #222;
+    }
+    .lang-toggle a { color: var(--gold); text-decoration: none; font-size: 11px; font-weight: 700; }
+    .lang-toggle a.inactive { color: #666; font-weight: 400; }
+    .lang-toggle span { color: #444; font-size: 11px; }
+    .side-nav nav { display: flex; flex-direction: column; padding: 8px 0; }
+    .side-nav nav a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 11px;
+      padding: 9px 16px;
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .side-nav nav a:hover { color: #fff; }
+    .side-nav nav a.active {
+      color: var(--gold);
+      background: rgba(184,150,12,0.08);
+      border-right: 2px solid var(--gold);
+    }
+
+    /* ============================================================
+       MOBILE: TOP HEADER
+    ============================================================ */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid #222;
+      z-index: 300;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp);
+    }
+    .mobile-logo {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      line-height: 1.5;
+    }
+    .mobile-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mobile-recruit-btn {
+      background: var(--gold);
+      color: #fff;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      white-space: nowrap;
+    }
+    .hamburger {
+      width: 32px; height: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: #fff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* Mobile drawer menu */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 56px; left: 0; right: 0; bottom: 0;
+      background: rgba(10,10,10,0.97);
+      z-index: 299;
+      flex-direction: column;
+      padding: 24px var(--sp);
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+    .mobile-drawer nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+    .mobile-drawer nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 17px;
+      font-weight: 400;
+      padding: 16px 0;
+      border-bottom: 1px solid #1e1e1e;
+      transition: color 0.2s;
+    }
+    .mobile-drawer nav a:hover { color: var(--gold); }
+    .mobile-drawer .drawer-footer {
+      display: flex;
+      gap: 20px;
+      padding-top: 20px;
+    }
+    .mobile-drawer .drawer-footer a {
+      color: #777;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    /* ============================================================
+       FIXED CTA BUTTON
+    ============================================================ */
+    .cta-fixed {
+      position: fixed;
+      bottom: 40px;
+      right: calc(var(--nav-width) + 20px);
+      z-index: 300;
+      width: 80px; height: 80px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 0 0 4px rgba(192,57,43,0.25), 0 4px 20px rgba(192,57,43,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-fixed::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,57,43,0.35);
+    }
+    .cta-fixed:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 0 4px rgba(192,57,43,0.35), 0 6px 24px rgba(192,57,43,0.5);
+    }
+    .cta-fixed span { color: #fff; font-size: 10px; font-weight: 700; line-height: 1.5; }
+
+    /* ============================================================
+       MAIN WRAPPER
+    ============================================================ */
+    main { margin-right: var(--nav-width); }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .circle-deco {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      pointer-events: none;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in.delay-1 { transition-delay: 0.15s; }
+    .fade-in.delay-2 { transition-delay: 0.30s; }
+    .section-label {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(26px, 3.8vw, 52px);
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================================================
+       1. HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1800&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      padding-left: var(--logo-width);
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.2));
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 60px;
+      max-width: 680px;
+    }
+    .hero-content h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(15px, 1.8vw, 22px);
+      font-weight: 300;
+      line-height: 2;
+      letter-spacing: 0.08em;
+    }
+    .hero-main {
+      display: block;
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 6px 0;
+      white-space: nowrap;
+    }
+    .hero-sub {
+      display: block;
+      white-space: nowrap;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 48px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      animation: scrollBounce 2.2s ease-in-out infinite;
+    }
+    .s-text { font-size: 9px; letter-spacing: 0.25em; color: rgba(255,255,255,0.7); }
+    .s-line { width: 1px; height: 50px; background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent); }
+    @keyframes scrollBounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ============================================================
+       2. MESSAGE
+    ============================================================ */
+    #message {
+      background: var(--dark);
+      padding: 130px 100px 130px calc(var(--logo-width) + 60px);
+    }
+    .message-body { max-width: 680px; }
+    .message-body p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(14px, 1.5vw, 17px);
+      line-height: 2.5;
+      letter-spacing: 0.05em;
+      color: #ccc;
+      margin-bottom: 26px;
+    }
+    .message-body p strong { color: #fff; font-weight: 500; }
+
+    /* ============================================================
+       3. BUSINESS OVERVIEW
+    ============================================================ */
+    #business {
+      background: var(--black);
+      padding: 150px 100px 150px calc(var(--logo-width) + 60px);
+      position: relative;
+      overflow: hidden;
+      min-height: 65vh;
+      display: flex;
+      align-items: center;
+    }
+    #business .bg-img {
+      position: absolute; right: 0; top: 0;
+      width: 55%; height: 100%;
+      background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80') center/cover no-repeat;
+      opacity: 0.18;
+      mask-image: linear-gradient(to left, rgba(0,0,0,.7), transparent 80%);
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,.7), transparent 80%);
+    }
+    #business .inner { position: relative; z-index: 1; max-width: 520px; }
+    #business .inner .desc {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(14px, 1.7vw, 19px);
+      line-height: 2;
+      color: #ccc;
+      margin-top: 36px;
+    }
+
+    /* ============================================================
+       4. CHALLENGES
+    ============================================================ */
+    #challenges { background: var(--black); }
+    .sec-img-header {
+      position: relative;
+      height: 55vh; min-height: 300px;
+      display: flex;
+      align-items: flex-end;
+      padding: 50px 80px 50px calc(var(--logo-width) + 40px);
+      overflow: hidden;
+    }
+    .sec-img-header .bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .sec-img-header .bg::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.52); }
+    .sec-img-header .title-wrap { position: relative; z-index: 1; }
+    .challenges-list { padding: 80px 80px 100px calc(var(--logo-width) + 40px); }
+    .challenge-item {
+      display: flex;
+      gap: 36px;
+      align-items: flex-start;
+      padding: 48px 0;
+      border-bottom: 1px solid #1d1d1d;
+    }
+    .challenge-item:first-child { padding-top: 0; }
+    .ch-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+      min-width: 60px;
+      padding-top: 4px;
+    }
+    .ch-content h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(17px, 2vw, 25px);
+      font-weight: 400;
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+    .ch-content p { font-size: 13px; line-height: 2.1; color: #aaa; max-width: 620px; }
+
+    /* ============================================================
+       5. STRENGTHS
+    ============================================================ */
+    #strengths { background: var(--black); }
+    .strengths-list { padding: 80px 60px 90px calc(var(--logo-width) + 40px); }
+    .strength-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 70px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .strength-item:first-child { padding-top: 0; }
+    .strength-item.reverse { direction: rtl; }
+    .strength-item.reverse > * { direction: ltr; }
+    .str-img { overflow: hidden; aspect-ratio: 16/10; }
+    .str-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.72);
+      transition: filter 0.4s, transform 0.5s;
+    }
+    .strength-item:hover .str-img img { filter: brightness(0.88); transform: scale(1.04); }
+    .str-text { padding: 36px 52px; display: flex; flex-direction: column; justify-content: center; }
+    .str-text h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(16px, 1.8vw, 23px);
+      font-weight: 400;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .str-text p { font-size: 13px; line-height: 2.1; color: #aaa; }
+    .str-text .note { font-size: 11px; color: #666; margin-top: 12px; }
+
+    /* ============================================================
+       6. ABOUT
+    ============================================================ */
+    #about {
+      position: relative;
+      padding: 150px 100px 150px calc(var(--logo-width) + 60px);
+      overflow: hidden;
+      background: #0d0d08;
+    }
+    #about::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1400&q=30') center/cover;
+      filter: grayscale(1);
+      opacity: 0.06;
+    }
+    .about-inner { position: relative; z-index: 1; }
+    .about-tagline {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(15px, 1.8vw, 21px);
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      line-height: 2.5;
+      color: #ddd;
+      margin: 56px 0 44px;
+    }
+    .about-tagline strong { color: var(--gold); font-weight: 500; }
+    .pts-heading { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--gold); margin-bottom: 28px; letter-spacing: 0.1em; }
+    .points-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .point-card { border-left: 2px solid var(--gold); padding: 4px 0 4px 20px; }
+    .point-card h4 { font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 400; margin-bottom: 12px; }
+    .point-card p { font-size: 13px; line-height: 1.9; color: #999; }
+
+    /* ============================================================
+       7. QUALITY
+    ============================================================ */
+    #quality { background: #080808; padding: 150px 100px 150px calc(var(--logo-width) + 60px); }
+    .quality-sub { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .quality-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 80px; }
+    .q-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(184,150,12,0.2);
+      padding: 44px 30px;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .q-card:hover { background: rgba(184,150,12,0.04); }
+    .q-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(to right, var(--gold), transparent); }
+    .q-card .en { font-size: 22px; font-weight: 700; color: var(--gold); margin-bottom: 14px; font-family: Georgia, serif; }
+    .q-card h4 { font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 400; margin-bottom: 16px; }
+    .q-card p { font-size: 13px; line-height: 1.9; color: #888; }
+
+    /* ============================================================
+       8. STORIES
+    ============================================================ */
+    #stories { background: var(--black); }
+    .stories-header { padding: 150px 80px 80px calc(var(--logo-width) + 40px); position: relative; }
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      padding: 0 0 100px calc(var(--logo-width));
+    }
+    .story-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
+    .story-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.43) saturate(0.8);
+      transition: filter 0.4s, transform 0.5s;
+    }
+    .story-card:hover img { filter: brightness(0.62); transform: scale(1.04); }
+    .story-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 36px 28px 28px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 60%, transparent);
+    }
+    .itvw-num { font-size: 10px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 10px; font-weight: 500; }
+    .story-card h3 { font-family: 'Noto Serif JP', serif; font-size: clamp(12px, 1.4vw, 18px); font-weight: 400; line-height: 1.6; margin-bottom: 10px; }
+    .eng-meta { font-size: 11px; color: #aaa; line-height: 1.6; }
+    .eng-certs { font-size: 11px; color: #777; margin-top: 4px; }
+
+    /* ============================================================
+       9. NUMBERS
+    ============================================================ */
+    #numbers { background: var(--black); padding: 120px 60px 100px calc(var(--logo-width) + 40px); }
+    .numbers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 70px; }
+    .timeline-panel { background: #f5f2ec; color: #333; padding: 52px 44px; }
+    .timeline-panel h3 { font-family: 'Noto Serif JP', serif; font-size: 19px; color: #333; margin-bottom: 28px; }
+    .tl-list { list-style: none; }
+    .tl-list li { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+    .tl-year { font-family: 'Noto Serif JP', serif; font-size: 19px; font-weight: 700; color: var(--gold); min-width: 52px; }
+    .tl-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); margin-top: 8px; flex-shrink: 0; }
+    .tl-event { font-size: 13px; line-height: 1.8; color: #444; }
+    .stats-right { display: grid; grid-template-rows: auto 1fr; gap: 4px; }
+    .stats-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .stat-card { background: #f0ece3; padding: 36px 32px; display: flex; flex-direction: column; }
+    .stat-label { font-family: 'Noto Serif JP', serif; font-size: 13px; color: #555; margin-bottom: 12px; }
+    .stat-num { font-family: 'Noto Serif JP', serif; font-size: clamp(40px, 4.5vw, 62px); font-weight: 700; color: var(--gold); line-height: 1; }
+    .stat-unit { font-size: 13px; color: #777; margin-top: 8px; }
+    .countries-panel { background: #f0ece3; padding: 36px 32px; }
+    .countries-panel h3 { font-family: 'Noto Serif JP', serif; font-size: 15px; color: #444; margin-bottom: 16px; }
+    .countries-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px 12px; }
+    .countries-grid span { font-size: 12px; color: #666; padding: 5px 0; border-bottom: 1px solid #ddd; }
+    .data-note { font-size: 11px; color: #aaa; margin-top: 12px; text-align: right; }
+
+    /* ============================================================
+       10. ALBUM
+    ============================================================ */
+    #album { background: var(--black); padding: 100px 0 0 var(--logo-width); }
+    .album-header { padding: 0 60px 52px 40px; }
+    .album-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-auto-rows: 200px; gap: 3px; }
+    .a-photo { overflow: hidden; cursor: pointer; }
+    .a-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.68) saturate(0.85);
+      transition: filter 0.35s, transform 0.45s;
+    }
+    .a-photo:hover img { filter: brightness(0.92) saturate(1); transform: scale(1.06); }
+    .a-photo.wide { grid-column: span 2; }
+    .a-photo.tall  { grid-row:    span 2; }
+
+    /* ============================================================
+       11. CTA
+    ============================================================ */
+    #cta {
+      background: var(--dark);
+      padding: 130px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=60') center/cover;
+      opacity: 0.05;
+    }
+    .cta-inner { position: relative; z-index: 1; }
+    #cta h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(22px, 3.8vw, 50px);
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      margin-bottom: 52px;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 18px 64px;
+      border: 1px solid rgba(255,255,255,0.55);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      transition: all 0.3s;
+      font-family: 'Noto Serif JP', serif;
+    }
+    .cta-btn:hover { background: #fff; color: #000; border-color: #fff; }
+
+    /* ============================================================
+       12. OTHER INFO
+    ============================================================ */
+    #info { background: var(--gray-light); color: #333; padding: 110px 80px 110px calc(var(--logo-width) + 60px); }
+    #info .section-title { color: #222; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; margin-top: 64px; }
+    .ig-label {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      border: 2px solid #bbb;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px; color: #666;
+      margin-bottom: 22px;
+    }
+    .news-list { list-style: none; }
+    .news-list li { display: flex; flex-direction: column; gap: 4px; padding: 13px 0; border-bottom: 1px solid #ccc; }
+    .n-date { font-size: 11px; color: #999; letter-spacing: 0.04em; }
+    .news-list a { font-size: 13px; color: #333; text-decoration: none; line-height: 1.6; transition: color 0.2s; }
+    .news-list a:hover { color: var(--gold); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: #050505;
+      color: #555;
+      padding: 36px 80px 36px calc(var(--logo-width) + 60px);
+      margin-right: var(--nav-width);
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    footer a { color: #666; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #aaa; }
+
+    /* ============================================================
+       RESPONSIVE — TABLET (max-width: 1100px)
+    ============================================================ */
+    @media (max-width: 1100px) {
+      :root { --nav-width: 0px; --logo-width: 0px; }
+
+      .site-logo { display: none; }
+      .side-nav  { display: none; }
+      .mobile-header { display: flex; }
+      .mobile-drawer { display: flex; }
+
+      main { margin-right: 0; margin-top: 56px; }
+      footer { margin-right: 0; padding: 32px var(--sp); }
+
+      /* CTA fixed button */
+      .cta-fixed { right: 16px; bottom: 24px; width: 70px; height: 70px; }
+      .cta-fixed::before { display: none; }
+
+      /* Hero */
+      #hero { padding-left: 0; }
+      .hero-content { padding: 0 var(--sp); max-width: 100%; }
+
+      /* Sections: uniform side padding */
+      #message  { padding: 80px var(--sp); }
+      #business { padding: 80px var(--sp); min-height: auto; }
+      #about    { padding: 80px var(--sp); }
+      #quality  { padding: 80px var(--sp); }
+      #numbers  { padding: 80px var(--sp) 70px; }
+      #info     { padding: 80px var(--sp); }
+
+      .sec-img-header { padding: 40px var(--sp); }
+      .challenges-list  { padding: 60px var(--sp) 80px; }
+      .strengths-list   { padding: 60px var(--sp) 80px; }
+      .stories-header   { padding: 80px var(--sp) 50px; }
+      .stories-grid     { padding: 0 0 70px; }
+      #album            { padding: 70px 0 0; }
+      .album-header     { padding: 0 var(--sp) 40px; }
+
+      /* Business bg */
+      #business .bg-img { width: 100%; opacity: 0.1; mask-image: none; -webkit-mask-image: none; }
+
+      /* Strength items: single column */
+      .strength-item {
+        grid-template-columns: 1fr;
+        padding: 50px 0;
+        direction: ltr;
+      }
+      .strength-item.reverse { direction: ltr; }
+      .strength-item.reverse > * { direction: ltr; }
+      .str-text { padding: 24px 0 0; }
+
+      /* Quality: single column */
+      .quality-grid { grid-template-columns: 1fr; margin-top: 50px; }
+
+      /* Points: single column */
+      .points-grid { grid-template-columns: 1fr; gap: 20px; }
+      .about-tagline { margin: 36px 0 28px; }
+
+      /* Stories: single column */
+      .stories-grid { grid-template-columns: 1fr; }
+      .story-card { aspect-ratio: 16/9; }
+
+      /* Numbers */
+      .numbers-grid { grid-template-columns: 1fr; margin-top: 40px; }
+      .stats-top { grid-template-columns: 1fr 1fr; }
+
+      /* Album: 2 columns */
+      .album-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 180px; }
+      .a-photo.wide { grid-column: span 1; }
+      .a-photo.tall { grid-row: span 1; }
+
+      /* Info */
+      .info-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; }
+
+      /* CTA */
+      #cta { padding: 80px var(--sp); }
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE (max-width: 600px)
+    ============================================================ */
+    @media (max-width: 600px) {
+
+      /* Hero */
+      .hero-content h1 { font-size: 15px; }
+      .hero-main { font-size: 36px; white-space: normal; word-break: keep-all; }
+      .hero-sub  { white-space: normal; word-break: keep-all; }
+      .scroll-indicator { bottom: 28px; }
+
+      /* Section titles */
+      .section-title { font-size: 28px; }
+
+      /* Challenges */
+      .challenge-item { flex-direction: column; gap: 8px; padding: 36px 0; }
+      .ch-num { min-width: auto; }
+
+      /* Stats: single column */
+      .stats-top { grid-template-columns: 1fr 1fr; }
+      .stat-num { font-size: 48px; }
+
+      /* Countries */
+      .countries-grid { grid-template-columns: repeat(2,1fr); }
+
+      /* Album: 2 columns tighter */
+      .album-grid { grid-auto-rows: 140px; gap: 2px; }
+
+      /* CTA */
+      .cta-btn { padding: 16px 40px; font-size: 13px; }
+
+      /* Footer */
+      footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     MOBILE HEADER (hamburger nav)
+============================================================ -->
+<header class="mobile-header">
+  <a href="#hero" class="mobile-logo">会社名<br>RECRUIT SITE</a>
+  <div class="mobile-header-right">
+    <a href="#" class="mobile-recruit-btn">募集要項</a>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="drawer">
+  <nav>
+    <a href="#hero"     class="drawer-link">採用トップ</a>
+    <a href="#message"  class="drawer-link">メッセージ</a>
+    <a href="#business" class="drawer-link">事業概要</a>
+    <a href="#about"    class="drawer-link">会社について</a>
+    <a href="#stories"  class="drawer-link">挑戦者ストーリー</a>
+    <a href="#numbers"  class="drawer-link">数字で見る会社</a>
+    <a href="#album"    class="drawer-link">現場アルバム</a>
+    <a href="#info"     class="drawer-link">その他情報</a>
+  </nav>
+  <div class="drawer-footer">
+    <a href="#">コーポレートサイト</a>
+    <a href="#">JP / EN</a>
+  </div>
+</div>
+
+<!-- ============================================================
+     DESKTOP: FIXED LEFT LOGO
+============================================================ -->
+<div class="site-logo">
+  <a href="#">会社名<br>RECRUIT<br>SITE</a>
+</div>
+
+<!-- ============================================================
+     DESKTOP: FIXED RIGHT NAV
+============================================================ -->
+<aside class="side-nav">
+  <div class="side-nav-top">
+    <a href="#" class="btn-recruitment">募集要項</a>
+    <a href="#" class="btn-corporate">コーポレートサイト</a>
+    <div class="lang-toggle">
+      <a href="#">JP</a><span>/</span><a href="#" class="inactive">EN</a>
+    </div>
+  </div>
+  <nav>
+    <a href="#hero"     class="nav-link">採用トップ</a>
+    <a href="#message"  class="nav-link">メッセージ</a>
+    <a href="#business" class="nav-link">事業概要</a>
+    <a href="#about"    class="nav-link">会社について</a>
+    <a href="#stories"  class="nav-link">挑戦者ストーリー</a>
+    <a href="#numbers"  class="nav-link">数字で見る会社</a>
+    <a href="#album"    class="nav-link">現場アルバム</a>
+    <a href="#info"     class="nav-link">その他情報</a>
+  </nav>
+</aside>
+
+<!-- FIXED CTA -->
+<a href="#cta" class="cta-fixed">
+  <span>話を<br>聞いてみる</span>
+</a>
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main>
+
+  <!-- 1. HERO -->
+  <section id="hero">
+    <div class="hero-content fade-in">
+      <h1>
+        ここは、<br>
+        <span class="hero-main">世界を担う</span>
+        <span class="hero-sub">精鋭エンジニアが集う場所</span>
+      </h1>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="s-text">Scroll</span>
+      <span class="s-line"></span>
+    </div>
+  </section>
+
+  <!-- 2. MESSAGE -->
+  <section id="message">
+    <div class="message-body">
+      <p class="fade-in">いま、業界は求めている。<br>長年の現場経験を乗り越え得た技術と先見を。<br>エキスパートのエンジニアを。</p>
+      <p class="fade-in delay-1">リアリティのある話をしようじゃないか。<br>グローバルスタンダードで突き詰めようじゃないか。</p>
+      <p class="fade-in delay-2">その技術を、自分と社会のために使う日が来た。<br>今まで以上に漲ることを、今まで以上に滾ることを。<br><strong>弊社で謳歌しよう。いま、匠人求む。</strong></p>
+    </div>
+  </section>
+
+  <!-- 3. BUSINESS OVERVIEW -->
+  <section id="business">
+    <div class="bg-img" aria-hidden="true"></div>
+    <div class="inner fade-in">
+      <p class="section-label">事業概要</p>
+      <h2 class="section-title">国内外のインフラ建設事業者の<br>技術コンサルティングを<br>様々な形態にて行っています。</h2>
+      <p class="desc">土木・建設・エネルギーなど多岐にわたるプロジェクトに、熟練エンジニアの知見を届けます。</p>
+    </div>
+  </section>
+
+  <!-- 4. CHALLENGES -->
+  <section id="challenges">
+    <div class="sec-img-header">
+      <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1800&q=80');"></div>
+      <div class="circle-deco" style="width:200px;height:200px;right:20%;bottom:10%;opacity:0.3;"></div>
+      <div class="title-wrap fade-in">
+        <p class="section-label" style="color:#ddd;">会社が立ち向かう</p>
+        <h2 class="section-title">業界課題</h2>
+      </div>
+    </div>
+    <div class="challenges-list">
+      <div class="challenge-item fade-in">
+        <div class="ch-num">課題 1.</div>
+        <div class="ch-content">
+          <h3>技術の底力を<br>活かせていない</h3>
+          <p>現場経験から得られる本当に役に立つ知見やノウハウは、機械では掌握しきれない。100年前から続く既に確立された技術を使う現場でさえも、完璧に設計出来ているものが全てとは言い切れない。そんな現場を一つでも多く減らすため、熟練のエンジニアの力を活かすべき時だ。</p>
+        </div>
+      </div>
+      <div class="challenge-item fade-in">
+        <div class="ch-num">課題 2.</div>
+        <div class="ch-content">
+          <h3>技術が<br>伝承されにくい</h3>
+          <p>多くの場合、身に付けた稀有な技術がエンジニア間で伝承されることなく途切れてしまう。教え方、学び方、残し方、伝え方、これは業界の歴史を紡ぐための至上命題である。</p>
+        </div>
+      </div>
+      <div class="challenge-item fade-in">
+        <div class="ch-num">課題 3.</div>
+        <div class="ch-content">
+          <h3>総合力のある<br>エンジニアが乏しい</h3>
+          <p>インフラ建設の工事監理ができるエンジニアが少ない。土木建設技術はもちろん、よりビジネスとして事業を理解できるエンジニアが業界全体に強く求められている。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. STRENGTHS -->
+  <section id="strengths">
+    <div class="sec-img-header">
+      <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1800&q=80');"></div>
+      <div class="circle-deco" style="width:260px;height:260px;right:30%;top:20%;opacity:0.3;"></div>
+      <div class="title-wrap fade-in">
+        <p class="section-label" style="color:#ddd;">会社が</p>
+        <h2 class="section-title">発揮する力</h2>
+      </div>
+    </div>
+    <div class="strengths-list">
+      <div class="strength-item fade-in">
+        <div class="str-img">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80" alt="事業サポート">
+        </div>
+        <div class="str-text">
+          <h3>経験豊富なエンジニア集団による<br>事業サポート</h3>
+          <p>ゼネコン、エンジニアリング会社、コンサルティング会社等で国内外の建設プロジェクトを牽引してきた非凡なエンジニアの集団に。建設事業の調査・計画・契約から施工までを熟知した者こそ弊社へ。</p>
+        </div>
+      </div>
+      <div class="strength-item reverse fade-in">
+        <div class="str-img">
+          <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80" alt="100年後の礎">
+        </div>
+        <div class="str-text">
+          <h3>100年後の礎となる<br>プロジェクト</h3>
+          <p>建設は、シニアエンジニアの腕の見せ所。自身が関わった建設物が大地の一部として機能し続けるように。現在ではなく未来の礎を造れる者こそ弊社へ。</p>
+        </div>
+      </div>
+      <div class="strength-item fade-in">
+        <div class="str-img">
+          <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=900&q=80" alt="リモートエンジニアリング">
+        </div>
+        <div class="str-text">
+          <h3>リモート<br>エンジニアリング</h3>
+          <p>エンジニアが現地へ行かずとも遠隔でプロジェクト支援を行える仕組みを。自身の価値をシャープにし、働き方の最前線をともに切り拓ける者こそ弊社へ。</p>
+          <p class="note">※「リモートエンジニアリング」は弊社の登録商標です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ABOUT -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="fade-in">
+        <p class="section-label">会社とは</p>
+        <h2 class="section-title" style="letter-spacing:0.22em;">社 会 を 揺 る が す<br>シニアエンジニア集団</h2>
+      </div>
+      <p class="about-tagline fade-in delay-1">エンジニアに求める<strong>3つのこと</strong></p>
+      <p class="pts-heading fade-in delay-1">Company Value</p>
+      <div class="points-grid">
+        <div class="point-card fade-in">
+          <h4>技術への誇り</h4>
+          <p>長年培った技術と経験に誇りを持ち、その知見を最大限に活かす姿勢。現場で磨かれたスキルこそが、真の価値を生む。</p>
+        </div>
+        <div class="point-card fade-in delay-1">
+          <h4>社会への貢献</h4>
+          <p>インフラ整備を通じて、社会と人々の生活基盤を支えるという強い使命感。自分の仕事が未来を変えると信じること。</p>
+        </div>
+        <div class="point-card fade-in delay-2">
+          <h4>行動の品質</h4>
+          <p>一つひとつの判断と実行に高い基準を持ち続けること。言葉ではなく、行動で示す姿勢がすべての信頼の基盤となる。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. QUALITY -->
+  <section id="quality">
+    <div class="fade-in">
+      <p class="quality-sub">Company Quality とは、</p>
+      <h2 class="section-title">行動の品質</h2>
+    </div>
+    <div class="quality-grid">
+      <div class="q-card fade-in">
+        <div class="en">Innovative</div>
+        <h4>業界に新機軸を</h4>
+        <p>インフラコンサルティングの新しいスタンダードを打ち立てる。既存の枠を超えた発想と実行で、業界全体の革新を牽引する。</p>
+      </div>
+      <div class="q-card fade-in delay-1">
+        <div class="en">Breakthrough</div>
+        <h4>業界成長の障壁を突破</h4>
+        <p>イノベーションを起こすため、業界成長の障壁を知恵と力で突破する。常識に縛られず、課題の本質に向き合い続ける。</p>
+      </div>
+      <div class="q-card fade-in delay-2">
+        <div class="en">Ambitious</div>
+        <h4>次なる舞台への飛躍</h4>
+        <p>次なる舞台への飛躍を求めて。挑戦者として常に前を向き、より高い目標へと歩み続ける姿勢を大切にする。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STORIES -->
+  <section id="stories">
+    <div class="stories-header">
+      <div class="circle-deco" style="width:200px;height:200px;left:155px;top:100px;"></div>
+      <div class="circle-deco" style="width:300px;height:300px;left:200px;top:60px;opacity:0.1;"></div>
+      <div class="fade-in">
+        <h2 class="section-title">挑戦者ストーリー</h2>
+      </div>
+    </div>
+    <div class="stories-grid">
+      <div class="story-card fade-in">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&q=80" alt="Engineer 01">
+        <div class="story-info">
+          <div class="itvw-num">Engineer Interview 01</div>
+          <h3>人々が幸せな顔をするところを<br>見届けたい</h3>
+          <div class="eng-meta">エンジニア歴43年 ／ 2010年入社　山田 一郎</div>
+        </div>
+      </div>
+      <div class="story-card fade-in delay-1">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80" alt="Engineer 02">
+        <div class="story-info">
+          <div class="itvw-num">Engineer Interview 02</div>
+          <h3>これまでの経験に甘んじず、<br>常にアップデートする技術者でありたい</h3>
+          <div class="eng-meta">エンジニア歴45年 ／ 2023年入社　田中 誠也</div>
+          <div class="eng-certs">保有資格：技術士（建設部門・総合技術監理部門）</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. NUMBERS -->
+  <section id="numbers">
+    <div class="fade-in">
+      <h2 class="section-title">数字で見る会社</h2>
+    </div>
+    <div class="numbers-grid">
+      <div class="timeline-panel fade-in">
+        <h3>沿革</h3>
+        <ul class="tl-list">
+          <li><span class="tl-year">2010</span><span class="tl-dot"></span><span class="tl-event">会社設立</span></li>
+          <li><span class="tl-year">2012</span><span class="tl-dot"></span><span class="tl-event">東日本大震災の災害廃棄物処理業務</span></li>
+          <li><span class="tl-year">2016</span><span class="tl-dot"></span><span class="tl-event">フィリピンで水力発電事業のEPCm</span></li>
+          <li><span class="tl-year">2018</span><span class="tl-dot"></span><span class="tl-event">中間貯蔵施設工事支援</span></li>
+          <li><span class="tl-year">2019</span><span class="tl-dot"></span><span class="tl-event">60人の仲間が在籍、うち約50人のエンジニアが国内・海外10ヵ国以上で活躍</span></li>
+        </ul>
+      </div>
+      <div class="stats-right">
+        <div class="stats-top">
+          <div class="stat-card fade-in">
+            <div class="stat-label">施工実績数</div>
+            <div class="stat-num" data-count="100">0</div>
+            <div class="stat-unit">プロジェクト</div>
+          </div>
+          <div class="stat-card fade-in delay-1">
+            <div class="stat-label">施工実績国数</div>
+            <div class="stat-num" data-count="26">0</div>
+            <div class="stat-unit">ヵ国</div>
+          </div>
+          <div class="stat-card fade-in">
+            <div class="stat-label">合計エンジニア数</div>
+            <div class="stat-num" data-count="60">0</div>
+            <div class="stat-unit">名弱</div>
+          </div>
+          <div class="stat-card fade-in delay-1">
+            <div class="stat-label">エンジニアの平均年齢</div>
+            <div class="stat-num" data-count="58">0</div>
+            <div class="stat-unit">代後半</div>
+          </div>
+        </div>
+        <div class="countries-panel fade-in">
+          <h3>施工実施国一覧</h3>
+          <div class="countries-grid">
+            <span>アメリカ</span><span>イラク</span><span>インド</span>
+            <span>インドネシア</span><span>ウズベキスタン</span><span>エクアドル</span>
+            <span>カーボベルデ</span><span>カンボジア</span><span>キリバス</span>
+            <span>ケニア</span><span>シンガポール</span><span>スリランカ</span>
+            <span>チリ</span><span>香港</span><span>日本</span>
+            <span>ネパール</span><span>パキスタン</span><span>フィリピン</span>
+            <span>ブルネイ</span><span>ベトナム</span><span>マレーシア</span>
+            <span>ミャンマー</span><span>ラオス</span><span>バングラデシュ</span>
+          </div>
+          <p class="data-note">※最新時点でのデータ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. ALBUM -->
+  <section id="album">
+    <div class="album-header fade-in">
+      <h2 class="section-title">現場アルバム</h2>
+    </div>
+    <div class="album-grid">
+      <div class="a-photo wide tall">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1000&q=80" alt="">
+      </div>
+      <div class="a-photo">
+        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80" alt="">
+      </div>
+      <div class="a-photo">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="">
+      </div>
+      <div class="a-photo">
+        <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&q=80" alt="">
+      </div>
+      <div class="a-photo">
+        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=600&q=80" alt="">
+      </div>
+      <div class="a-photo wide">
+        <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1000&q=80" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. CTA -->
+  <section id="cta">
+    <div class="cta-inner">
+      <h2 class="fade-in">まず、一度語らおう。</h2>
+      <a href="#" class="cta-btn fade-in delay-1">話を聞いてみる</a>
+    </div>
+  </section>
+
+  <!-- 12. OTHER INFO -->
+  <section id="info">
+    <div class="fade-in">
+      <h2 class="section-title">その他情報</h2>
+    </div>
+    <div class="info-grid">
+      <div class="fade-in">
+        <div class="ig-label">お知らせ</div>
+        <ul class="news-list">
+          <li><span class="n-date">2026年04月01日</span><a href="#">2026年5月1日から社名を変更いたします。</a></li>
+          <li><span class="n-date">2025年05月21日</span><a href="#">社内勉強会（第１回）を開催しました。</a></li>
+          <li><span class="n-date">2025年02月27日</span><a href="#">大学セミナーでプレゼンテーションを行いました。</a></li>
+        </ul>
+      </div>
+      <div class="fade-in delay-1">
+        <div class="ig-label">トピックス</div>
+        <ul class="news-list">
+          <li><span class="n-date">2024年01月22日</span><a href="#">海外での洪水対策工事</a></li>
+          <li><span class="n-date">2023年05月17日</span><a href="#">人生後半が面白い　味が出るのはこれから</a></li>
+          <li><span class="n-date">2023年01月16日</span><a href="#">業界の常識に異議あり！</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2024 株式会社テンプレート. All Rights Reserved.</span>
+  <span>
+    <a href="#">プライバシーポリシー</a>&nbsp;/&nbsp;<a href="#">お問い合わせ</a>
+  </span>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script>
+  // --- Hamburger menu ---
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('drawer');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    drawer.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close drawer on link click
+  document.querySelectorAll('.drawer-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // --- Scroll spy (desktop side nav) ---
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
+  const spyObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const lnk = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+        if (lnk) lnk.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => spyObs.observe(s));
+
+  // --- Fade-in on scroll ---
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+  document.querySelector('.hero-content').classList.add('visible');
+
+  // --- Animated number counter ---
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.count, 10);
+    const dur = 1800, t0 = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(tick);
+  }
+  const ctrObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCounter(e.target); ctrObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num[data-count]').forEach(el => ctrObs.observe(el));
+</script>
+</body>
+</html>
