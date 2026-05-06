@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新卒採用｜株式会社〇〇〇〇</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+      color: #1a1a2e;
+      background: #fff;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --blue: #3333ff;
+      --navy: #1c1c3e;
+      --steel: #6b7a9a;
+      --light: #f0f0f0;
+      --header-h: 70px;
+    }
+
+    /* ===== HEADER ===== */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 32px;
+      height: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+    }
+    .header-logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #111;
+      font-style: italic;
+    }
+    .header-subtitle { font-size: 13px; color: #555; letter-spacing: 0.05em; }
+    .header-right {
+      display: flex;
+      align-items: center;
+      background: var(--navy);
+      height: 100%;
+      padding: 0 24px;
+      gap: 24px;
+    }
+    .header-nav-item { color: #fff; font-size: 13px; letter-spacing: 0.05em; cursor: pointer; }
+    .header-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.3); }
+    .header-menu-label { color: #fff; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; }
+
+    /* ===== FLOATING ENTRY ===== */
+    .entry-btn {
+      position: fixed;
+      right: 36px; bottom: 40px;
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.12em;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 900; cursor: pointer;
+      transition: transform 0.2s;
+      box-shadow: 0 8px 24px rgba(51,51,255,0.4);
+    }
+    .entry-btn:hover { transform: scale(1.08); }
+
+    /* ===== HERO ===== */
+    #hero {
+      position: relative;
+      width: 100%; height: 100vh; min-height: 600px;
+      overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #e8e8d8 0%, #c8d8e8 40%, #b8c8d8 70%, #a8b8c8 100%);
+    }
+    .hero-noise {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+      background-size: 200px; opacity: 0.3;
+    }
+    .hero-diamonds { position: absolute; inset: 0; pointer-events: none; }
+    .hero-diamond {
+      position: absolute;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      transform: rotate(45deg);
+    }
+    .hero-diamond:nth-child(1) { width: 320px; height: 320px; top: -80px; right: 80px; }
+    .hero-diamond:nth-child(2) { width: 500px; height: 500px; top: -160px; right: -60px; }
+    .hero-diamond:nth-child(3) { width: 200px; height: 200px; bottom: 60px; left: 60px; }
+    .hero-diamond:nth-child(4) { width: 380px; height: 380px; bottom: -100px; left: -40px; }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 80px; padding-top: 70px;
+      max-width: 900px;
+    }
+    .hero-title {
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 900; line-height: 1.35;
+      color: #111; letter-spacing: -0.01em;
+    }
+    .hero-en {
+      margin-top: 28px; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.15em; color: #555;
+      text-transform: uppercase; line-height: 1.8;
+    }
+
+    /* ===== CONCEPT ===== */
+    #concept {
+      background: #f4f4f4;
+      padding: 100px 40px;
+      text-align: center;
+    }
+    .section-label {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--steel); margin-bottom: 12px;
+    }
+    .section-title-jp {
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 800; color: #111; margin-bottom: 20px;
+    }
+    .section-desc { font-size: 15px; color: #555; line-height: 1.8; max-width: 600px; margin: 0 auto 60px; }
+    .video-wrap {
+      position: relative; max-width: 800px; margin: 0 auto;
+      border-radius: 4px; overflow: hidden; aspect-ratio: 16/9;
+      background: #222; cursor: pointer;
+    }
+    .video-thumbnail { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+    .video-play {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(51,51,255,0.85);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-play::after {
+      content: ''; border-style: solid;
+      border-width: 12px 0 12px 22px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 4px;
+    }
+    .video-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 20px 28px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      color: #fff; text-align: left;
+    }
+    .video-caption-main { font-size: 18px; font-weight: 700; letter-spacing: 0.05em; }
+    .video-caption-sub { font-size: 12px; letter-spacing: 0.1em; opacity: 0.8; }
+
+    /* ===== HERO PHOTO BAND ===== */
+    .hero-image-section { width: 100%; height: 70vh; overflow: hidden; }
+    .hero-image-section img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+
+    /* =========================================================
+       STORY SECTIONS — Scroll-driven center line + sticky image
+       ========================================================= */
+    #story { position: relative; }
+
+    .story-line-wrap {
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 0;
+      z-index: 20;
+      pointer-events: none;
+    }
+    .story-line-track {
+      position: absolute;
+      left: 0; top: 0;
+      width: 5px; height: 100%;
+      background: rgba(200,200,200,0.4);
+      transform: translateX(-50%);
+      border-radius: 3px;
+    }
+    .story-line-fill {
+      position: absolute;
+      left: 0; top: 0;
+      width: 5px; height: 0;
+      background: #fff;
+      transform: translateX(-50%);
+      transition: height 0.06s linear;
+      border-radius: 3px;
+      box-shadow: 0 0 12px rgba(255,255,255,0.8);
+    }
+    .story-num-badge {
+      position: absolute; left: 0;
+      transform: translateX(-50%);
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: 16px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      letter-spacing: 0.05em;
+      z-index: 25;
+      transition: background 0.4s;
+    }
+    .story-num-badge.active { background: var(--blue); }
+
+    .story-body-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .story-item {
+      min-height: 100vh;
+      padding: 0 80px 80px 80px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative;
+    }
+    .story-item:nth-child(odd)  { background: #ebebeb; }
+    .story-item:nth-child(even) { background: #b0bace; }
+
+    .story-keyword {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .story-item:nth-child(odd)  .story-keyword { color: var(--navy); }
+    .story-item:nth-child(even) .story-keyword { color: rgba(255,255,255,0.7); }
+
+    .story-heading {
+      font-size: clamp(18px, 2.2vw, 28px);
+      font-weight: 900; line-height: 1.5; margin-bottom: 24px;
+    }
+    .story-item:nth-child(odd)  .story-heading { color: #111; }
+    .story-item:nth-child(even) .story-heading { color: #fff; }
+
+    .story-text { font-size: 14px; line-height: 2.1; }
+    .story-item:nth-child(odd)  .story-text { color: #444; }
+    .story-item:nth-child(even) .story-text { color: rgba(255,255,255,0.85); }
+
+    .story-highlight { background: rgba(51,51,255,0.12); padding: 1px 5px; border-radius: 2px; }
+    .story-item:nth-child(even) .story-highlight { background: rgba(255,255,255,0.2); }
+
+    .story-speech {
+      margin-top: 28px;
+      background: rgba(20,20,50,0.75);
+      color: #fff; font-size: 14px; line-height: 1.9;
+      padding: 18px 22px; border-radius: 24px; position: relative;
+    }
+    .story-speech::before {
+      content: ''; position: absolute; top: -11px; left: 44px;
+      border-style: solid; border-width: 0 10px 11px;
+      border-color: transparent transparent rgba(20,20,50,0.75);
+    }
+    .story-stats { display: flex; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
+    .story-stat-num {
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 900; letter-spacing: -0.02em;
+    }
+    .story-item:nth-child(odd)  .story-stat-num { color: var(--navy); }
+    .story-item:nth-child(even) .story-stat-num { color: #fff; }
+    .story-stat-label { font-size: 11px; margin-top: 3px; }
+    .story-item:nth-child(odd)  .story-stat-label { color: #666; }
+    .story-item:nth-child(even) .story-stat-label { color: rgba(255,255,255,0.65); }
+
+    .story-image-col {
+      position: sticky; top: var(--header-h);
+      height: calc(100vh - var(--header-h)); overflow: hidden;
+    }
+    .story-img { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s ease; }
+    .story-img.active { opacity: 1; }
+    .story-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    .products-overlay {
+      position: absolute; inset: 0;
+      background: rgba(130,150,180,0.5);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 40px;
+    }
+    .product-item {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 16px; gap: 8px;
+    }
+    .product-item-label {
+      font-size: 11px; color: #fff; font-weight: 700; letter-spacing: 0.08em;
+      background: rgba(28,28,62,0.8); padding: 4px 10px; border-radius: 2px;
+    }
+    .product-icon { font-size: 36px; }
+
+    /* ===== MISSION ===== */
+    #mission { position: relative; min-height: 80vh; display: flex; align-items: center; overflow: hidden; }
+    .mission-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80') center/cover no-repeat;
+      filter: grayscale(100%) brightness(0.5);
+    }
+    .mission-content {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr 1fr;
+      width: 100%; min-height: 80vh;
+    }
+    .mission-left, .mission-right { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+    .mission-title { font-size: clamp(15px,2vw,20px); color: rgba(255,255,255,0.7); line-height: 2; margin-bottom: 16px; }
+    .mission-emphasis { font-size: clamp(20px,3vw,32px); font-weight: 900; color: #fff; line-height: 1.65; }
+    .mission-emphasis mark { background: none; color: #8888ff; }
+    .mission-sub { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 2; }
+    .mission-sub mark { background: none; color: #fff; font-weight: 700; }
+    .mission-divider { position: absolute; top:0; bottom:0; left:50%; width:1px; background:rgba(255,255,255,0.2); }
+    .mission-circle {
+      position: absolute; top:50%; left:50%; transform: translate(-50%,-50%);
+      width: 80px; height: 80px; border-radius: 50%; background: var(--blue); z-index: 3;
+    }
+
+    /* ===== NAV CARDS ===== */
+    #nav-cards { padding: 80px 40px; background: #fff; }
+    .nav-cards-intro { text-align: center; margin-bottom: 48px; }
+    .nav-cards-intro p { font-size: 15px; color: #666; line-height: 1.8; }
+    .nav-cards-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2px; max-width: 1200px; margin: 0 auto;
+    }
+    .nav-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; background: #222; }
+    .nav-card img { width:100%; height:100%; object-fit:cover; transition: transform 0.5s; opacity:0.7; }
+    .nav-card:hover img { transform: scale(1.06); }
+    .nav-card-content { position:absolute; inset:0; padding:28px; display:flex; flex-direction:column; justify-content:flex-end; }
+    .nav-card-en { font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:6px; }
+    .nav-card-jp { font-size:18px; font-weight:800; color:#fff; }
+    .nav-card-desc { font-size:12px; color:rgba(255,255,255,0.75); margin-top:6px; line-height:1.7; }
+
+    /* ===== FOOTER ===== */
+    #footer { background:#5a6275; padding:60px 60px 40px; color:#fff; }
+    .footer-top {
+      display:grid; grid-template-columns: 1fr 1fr 1fr; gap:40px;
+      padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.15);
+    }
+    .footer-logo { font-size:32px; font-weight:900; font-style:italic; letter-spacing:-1px; margin-bottom:6px; }
+    .footer-logo-sub { font-size:14px; opacity:0.7; margin-bottom:24px; }
+    .footer-address { font-size:13px; line-height:2; opacity:0.75; }
+    .footer-corp-link { display:inline-flex; align-items:center; gap:6px; margin-top:20px; font-size:13px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.5); padding-bottom:2px; }
+    .footer-nav { display:flex; flex-direction:column; gap:16px; }
+    .footer-nav a { font-size:13px; letter-spacing:0.15em; opacity:0.8; transition:opacity 0.2s; display:flex; align-items:center; gap:8px; }
+    .footer-nav a::before { content:'—'; opacity:0.5; font-size:11px; }
+    .footer-nav a:hover { opacity:1; }
+    .footer-bottom { display:flex; justify-content:flex-end; align-items:center; gap:24px; padding-top:32px; font-size:11px; opacity:0.6; letter-spacing:0.08em; }
+
+    /* ===== DIGEST SECTION ===== */
+    #digest {
+      background: #ebebeb;
+      position: relative; overflow: hidden;
+      height: 680px; display: flex; align-items: center;
+    }
+    .digest-circle {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 520px; height: 520px; border-radius: 50%;
+      background: #fff;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; z-index: 2; padding: 60px;
+    }
+    .digest-num { font-size: clamp(60px, 8vw, 110px); font-weight: 900; letter-spacing: -0.03em; line-height: 1; color: #111; }
+    .digest-num-unit { font-size: clamp(30px, 4vw, 52px); font-weight: 900; color: #111; }
+    .digest-title-jp { font-size: clamp(16px, 2vw, 26px); font-weight: 700; letter-spacing: 0.18em; color: #111; margin-top: 8px; }
+    .digest-title-en { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: #111; margin-top: 10px; }
+    .digest-desc { font-size: 14px; color: #555; line-height: 1.9; letter-spacing: 0.06em; margin-top: 20px; }
+
+    .digest-box-wrap {
+      position: absolute; left: 4%; top: 50%;
+      transform: translateY(-50%); z-index: 1;
+    }
+    .iso-box {
+      position: relative; width: 220px; height: 220px;
+      transform-style: preserve-3d;
+      transform: rotateX(30deg) rotateY(-45deg) rotateZ(0deg);
+    }
+    .iso-face { position: absolute; width: 220px; height: 220px; }
+    .iso-face.top {
+      background: radial-gradient(circle, #aaa 1px, transparent 1px) 0 0 / 12px 12px;
+      background-color: #ddd;
+      transform: rotateX(90deg) translateZ(110px);
+    }
+    .iso-face.front {
+      background: radial-gradient(circle, #bbb 1px, transparent 1px) 0 0 / 12px 12px;
+      background-color: #e8e8e8;
+      transform: translateZ(110px);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .iso-face-window { width: 60px; height: 40px; background: #fff; border: 2px solid #ccc; }
+    .iso-face.right {
+      background: radial-gradient(circle, #999 1px, transparent 1px) 0 0 / 12px 12px;
+      background-color: #c8c8c8;
+      transform: rotateY(90deg) translateZ(110px);
+    }
+
+    /* ===== FADE-UP ===== */
+    .fade-up { opacity:0; transform:translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+    .fade-up:nth-child(2) { transition-delay:0.1s; }
+    .fade-up:nth-child(3) { transition-delay:0.2s; }
+    .fade-up:nth-child(4) { transition-delay:0.3s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:768px) {
+      .hero-content { padding: 0 24px; padding-top: 80px; }
+      .story-body-wrap { grid-template-columns: 1fr; }
+      .story-image-col { position:relative; top:auto; height:300px; }
+      .story-img { position:relative; height:300px; }
+      .mission-content { grid-template-columns:1fr; }
+      .footer-top { grid-template-columns:1fr; }
+      .story-item { padding: 60px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-left">
+    <div class="header-logo">CompanyName</div>
+    <div class="header-subtitle">新卒採用</div>
+  </div>
+  <div class="header-right">
+    <span class="header-nav-item">note</span>
+    <div class="header-divider"></div>
+    <span class="header-nav-item">✉</span>
+    <div class="header-divider"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;">
+      <div class="hamburger"><span></span><span></span><span></span></div>
+      <div class="header-menu-label">MENU</div>
+    </div>
+  </div>
+</header>
+
+<a href="#entry" class="entry-btn">ENTRY</a>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-diamonds">
+    <div class="hero-diamond"></div>
+    <div class="hero-diamond"></div>
+    <div class="hero-diamond"></div>
+    <div class="hero-diamond"></div>
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-title">
+      「価値」にこだわれ。<br>
+      成長は、「価値」への<br>
+      こだわりの中に。
+    </h1>
+    <p class="hero-en">
+      STICK TO "VALUE".<br>
+      GROWTH IS IN OUR COMMITMENT TO "VALUE".
+    </p>
+  </div>
+</section>
+
+<div class="hero-image-section">
+  <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&q=80" alt="製造現場">
+</div>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="section-label">Concept</div>
+  <h2 class="section-title-jp">採用コンセプト</h2>
+  <p class="section-desc">価値にこだわる私たちの想いをご覧ください。</p>
+  <div class="video-wrap">
+    <img class="video-thumbnail"
+      src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80"
+      alt="採用コンセプト動画">
+    <div class="video-play"></div>
+    <div class="video-caption">
+      <div class="video-caption-main">本当の価値を共につくり上げる</div>
+      <div class="video-caption-sub">Creating True Value Together</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIGEST -->
+<section id="digest">
+  <div class="digest-box-wrap">
+    <div class="iso-box">
+      <div class="iso-face top"></div>
+      <div class="iso-face front"><div class="iso-face-window"></div></div>
+      <div class="iso-face right"></div>
+    </div>
+  </div>
+  <div class="digest-circle">
+    <div>
+      <span class="digest-num">180</span><span class="digest-num-unit">秒</span>
+    </div>
+    <div class="digest-title-jp">で知る○○社</div>
+    <div class="digest-title-en">Find out in 3 minutes</div>
+    <p class="digest-desc">
+      まずは、○○社がどんな会社か<br>
+      ダイジェストでご覧ください。
+    </p>
+  </div>
+</section>
+
+<!-- STORY -->
+<div id="story">
+  <div class="story-line-wrap" id="storyLineWrap">
+    <div class="story-line-track"></div>
+    <div class="story-line-fill" id="storyLineFill"></div>
+    <div class="story-num-badge active" data-index="0" id="badge0">01</div>
+    <div class="story-num-badge"        data-index="1" id="badge1">02</div>
+    <div class="story-num-badge"        data-index="2" id="badge2">03</div>
+    <div class="story-num-badge"        data-index="3" id="badge3">04</div>
+    <div class="story-num-badge"        data-index="4" id="badge4">05</div>
+  </div>
+
+  <div class="story-body-wrap">
+    <div class="story-content-col">
+
+      <div class="story-item" data-index="0">
+        <div class="story-keyword">Business</div>
+        <h3 class="story-heading">○○社の事業</h3>
+        <p class="story-text">
+          世の中のモノづくりの生産性向上と<br>
+          環境改善の進化を支える<br>
+          <span class="story-highlight">ファブレスメーカー</span>です。<br><br>
+          私たちの商品は熱対策機器や環境改善機器など多岐にわたり、
+          モノづくりの現場には必要不可欠な存在です。
+        </p>
+      </div>
+
+      <div class="story-item" data-index="1">
+        <div class="story-keyword">Beginning</div>
+        <h3 class="story-heading">私たちの始まり</h3>
+        <p class="story-text">
+          <span class="story-highlight">1992年</span>&nbsp;
+          大手メーカーの商品企画が起点となり、<br>
+          機器の商品企画・開発・販売をする<br>
+          メーカーとして事業をスタートしました。
+        </p>
+        <div class="story-speech">
+          お客さまのニーズに真摯に向き合ってきた私たちは
+          業界でも認められる存在へと成長しました。
+        </div>
+      </div>
+
+      <div class="story-item" data-index="2">
+        <div class="story-keyword">Present</div>
+        <h3 class="story-heading">現在</h3>
+        <p class="story-text">
+          私たちが関わる業界は<br>
+          食品・自動車・半導体・鉄鋼など広範囲にわたります。<br>
+          <span class="story-highlight">12年連続</span>で新しいコンセプトの商品を送り出しています。
+        </p>
+        <div class="story-stats">
+          <div class="story-stat">
+            <div class="story-stat-num">3万社</div>
+            <div class="story-stat-label">取引実績社数</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">37.9%</div>
+            <div class="story-stat-label">直近5年平均営業利益率</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">31年</div>
+            <div class="story-stat-label">連続黒字経営</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-item" data-index="3">
+        <div class="story-keyword">Leading Part</div>
+        <h3 class="story-heading">あなたが主役となり、<br>ソリューション営業で<br>価値をうみだす</h3>
+        <p class="story-text">
+          私たちは<span class="story-highlight">「ワンテリトリーワンパーソン制」</span>という
+          一つのエリアを一人で担当する仕組みを採用しています。<br><br>
+          国内営業の<strong>20代構成比は40%</strong>と若いメンバーが中心です。
+        </p>
+      </div>
+
+      <div class="story-item" data-index="4">
+        <div class="story-keyword">Evaluation</div>
+        <h3 class="story-heading">日々の活動を正当に評価し<br>報酬へと反映</h3>
+        <p class="story-text">
+          プロセス評価制度という、営業の一連のプロセスを評価に結び付ける制度があります。
+          基本給・賞与（年4回）とは別に毎月、
+          <span class="story-highlight">業績賞与制度</span>があります。
+        </p>
+        <div class="story-stats">
+          <div class="story-stat">
+            <div class="story-stat-num">1,303万円</div>
+            <div class="story-stat-label">平均年収（正社員）</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">年4回</div>
+            <div class="story-stat-label">賞与支給</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="story-image-col" id="storyImageCol">
+      <div class="story-img active" data-index="0">
+        <img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=900&q=80" alt="事業">
+      </div>
+      <div class="story-img" data-index="1">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80" alt="始まり">
+      </div>
+      <div class="story-img" data-index="2">
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80" alt="製品" style="opacity:0.55;">
+        <div class="products-overlay">
+          <div class="product-item"><div class="product-icon">❄️</div><div class="product-item-label">熱対策機器</div></div>
+          <div class="product-item"><div class="product-icon">🌿</div><div class="product-item-label">環境改善機器</div></div>
+          <div class="product-item"><div class="product-icon">💧</div><div class="product-item-label">液体温調機器</div></div>
+          <div class="product-item"><div class="product-icon">🌡️</div><div class="product-item-label">精密空調機器</div></div>
+        </div>
+      </div>
+      <div class="story-img" data-index="3">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80" alt="営業">
+      </div>
+      <div class="story-img" data-index="4">
+        <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=900&q=80" alt="評価">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="mission-bg"></div>
+  <div class="mission-content">
+    <div class="mission-left">
+      <p class="mission-title">○○が目指すものは、</p>
+      <p class="mission-emphasis">
+        お客さまへ<br>
+        <mark>価値を提供</mark>し続けることを通して、<br>
+        <mark>社会へ貢献</mark>すること。
+      </p>
+    </div>
+    <div class="mission-right">
+      <p class="mission-sub">
+        私たちは<br>
+        ビジネスだけにとどまらない、<br>
+        <mark>社会的にも責任のある仕事</mark><br>
+        だと考えています。
+      </p>
+    </div>
+    <div class="mission-divider"></div>
+    <div class="mission-circle"></div>
+  </div>
+</section>
+
+<!-- NAV CARDS -->
+<section id="nav-cards">
+  <div class="nav-cards-intro"><p>さらに詳しく知りたい方へ</p></div>
+  <div class="nav-cards-grid">
+    <a href="#" class="nav-card fade-up">
+      <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=600&q=80" alt="Work">
+      <div class="nav-card-content">
+        <div class="nav-card-en">Work</div>
+        <div class="nav-card-jp">○○社の仕事</div>
+        <div class="nav-card-desc">モノづくりにおける役割や存在価値をご紹介</div>
+      </div>
+    </a>
+    <a href="#" class="nav-card fade-up">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="About">
+      <div class="nav-card-content">
+        <div class="nav-card-en">About Us</div>
+        <div class="nav-card-jp">企業としての○○社</div>
+        <div class="nav-card-desc">お客さまと向き合い成長し続けてきた企業の想い</div>
+      </div>
+    </a>
+    <a href="#" class="nav-card fade-up">
+      <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&q=80" alt="Environment">
+      <div class="nav-card-content">
+        <div class="nav-card-en">Environment</div>
+        <div class="nav-card-jp">働く環境</div>
+        <div class="nav-card-desc">育成制度・評価・福利厚生をご紹介</div>
+      </div>
+    </a>
+    <a href="#" class="nav-card fade-up">
+      <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80" alt="Interview">
+      <div class="nav-card-content">
+        <div class="nav-card-en">Interview</div>
+        <div class="nav-card-jp">インタビュー</div>
+        <div class="nav-card-desc">社員それぞれの「価値創造」をご覧ください</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">CompanyName</div>
+      <div class="footer-logo-sub">新卒採用</div>
+      <div class="footer-address">
+        〒000-0000<br>
+        ○○市○○区○○1-1-1（○○ビル）<br>
+        TEL 00-0000-0000 / FAX 00-0000-0000
+      </div>
+      <a href="#" class="footer-corp-link">コーポレートサイト ›</a>
+    </div>
+    <nav class="footer-nav">
+      <a href="#">○○社の仕事</a>
+      <a href="#">企業としての○○社</a>
+      <a href="#">働く環境</a>
+    </nav>
+    <nav class="footer-nav">
+      <a href="#">インタビュー</a>
+      <a href="#" id="entry">採用情報</a>
+      <a href="#">エントリー</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <a href="#">お問合せ</a>
+    <span>|</span>
+    <a href="#">プライバシーポリシー</a>
+    <span style="margin-left:16px;">COPYRIGHT (C) COMPANY NAME. ALL RIGHTS RESERVED.</span>
+  </div>
+</footer>
+
+<script>
+const storyEl     = document.getElementById('story');
+const lineFill    = document.getElementById('storyLineFill');
+const storyItems  = document.querySelectorAll('.story-item');
+const badges      = document.querySelectorAll('.story-num-badge');
+const storyImages = document.querySelectorAll('.story-img');
+
+function positionBadges() {
+  const storyTop = storyEl.getBoundingClientRect().top + window.scrollY;
+  storyItems.forEach((item, i) => {
+    const itemTop = item.getBoundingClientRect().top + window.scrollY;
+    const itemMid = itemTop - storyTop + item.offsetHeight / 2;
+    badges[i].style.top = itemMid + 'px';
+  });
+}
+
+function onScroll() {
+  const storyTop    = storyEl.getBoundingClientRect().top;
+  const storyHeight = storyEl.offsetHeight;
+  const viewMid     = window.innerHeight / 2;
+
+  let progress = (viewMid - storyTop) / storyHeight;
+  progress = Math.max(0, Math.min(1, progress));
+  lineFill.style.height = (progress * 100) + '%';
+
+  let activeIndex = 0;
+  storyItems.forEach((item, i) => {
+    const rect = item.getBoundingClientRect();
+    if (rect.top + rect.height / 2 < viewMid + 100) activeIndex = i;
+  });
+
+  storyImages.forEach((img, i) => img.classList.toggle('active', i === activeIndex));
+  badges.forEach((b, i) => b.classList.toggle('active', i === activeIndex));
+}
+
+const heroBg = document.querySelector('.hero-bg');
+function heroParallax() {
+  const y = window.scrollY;
+  if (y < window.innerHeight) heroBg.style.transform = `translateY(${y * 0.28}px)`;
+}
+
+const fadeEls = document.querySelectorAll('.fade-up');
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+fadeEls.forEach(el => fadeObs.observe(el));
+
+const headerLeft = document.querySelector('.header-left');
+function headerUpdate() {
+  headerLeft.style.background = window.scrollY > 80 ? 'rgba(255,255,255,0.98)' : 'rgba(255,255,255,0.9)';
+}
+
+function init() { positionBadges(); onScroll(); }
+window.addEventListener('scroll', () => { onScroll(); heroParallax(); headerUpdate(); }, { passive: true });
+window.addEventListener('resize', () => { positionBadges(); onScroll(); });
+window.addEventListener('load', init);
+init();
+</script>
+</body>
+</html>
