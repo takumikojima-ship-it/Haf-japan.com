@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社テンプレート｜採用サイト</title>
+
+  <!--
+    フォントを変更する場合は以下 URL と
+    :root 内の --font-ja / --font-en を合わせて変更してください
+    https://fonts.google.com/
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       CUSTOMIZE — ここだけ編集すれば全体デザインが変わります
+       ============================================================ */
+    :root {
+      /* --- COLOR ----------------------------------------------- */
+      --color-primary:      #5B21B6;   /* ヘッダー背景・見出し */
+      --color-primary-dark: #3B0E8C;
+      --color-accent:       #F97316;   /* 背景大文字・装飾バー */
+      --color-cta:          #10B981;   /* フローティング・送信ボタン */
+      --color-cta-dark:     #059669;
+
+      --color-dark:     #1C1C1C;
+      --color-text:     #555555;
+      --color-muted:    #999999;
+      --color-border:   #E5E7EB;
+      --color-bg-light: #F8F8F8;
+      --color-white:    #ffffff;
+
+      /* --- FONT ------------------------------------------------- */
+      --font-ja: 'Noto Sans JP', sans-serif;   /* 日本語 */
+      --font-en: 'Montserrat', sans-serif;     /* 英字・数字 */
+
+      --text-xs:      10px;
+      --text-sm:      12px;
+      --text-base:    13.5px;
+      --text-md:      16px;
+      --text-lg:      20px;
+      --text-xl:      26px;
+      --text-hero:    clamp(44px, 5.5vw, 78px);
+      --text-section: clamp(42px, 6vw, 76px);
+
+      --weight-light:   300;
+      --weight-regular: 400;
+      --weight-bold:    700;
+      --weight-black:   900;
+
+      --leading-tight: 1.4;
+      --leading-base:  1.9;
+      --leading-loose: 2.2;
+
+      /* --- SPACING --------------------------------------------- */
+      --space-xs:  8px;
+      --space-sm:  16px;
+      --space-md:  24px;
+      --space-lg:  40px;
+      --space-xl:  60px;
+      --space-2xl: 80px;
+      --space-3xl: 100px;
+
+      /* --- LAYOUT ---------------------------------------------- */
+      --header-height:  68px;
+      --logo-min-width: 300px;
+      --max-width:      1100px;
+      --max-width-wide: 1200px;
+
+      /* --- EFFECTS --------------------------------------------- */
+      --shadow-card:   0 6px 40px rgba(0,0,0,.07);
+      --shadow-header: 0 2px 20px rgba(0,0,0,.12);
+      --transition:    0.2s ease;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-ja);
+      font-size: var(--text-base);
+      color: var(--color-dark);
+      line-height: var(--leading-base);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: stretch;
+      height: var(--header-height);
+      transition: box-shadow var(--transition);
+    }
+    header.scrolled { box-shadow: var(--shadow-header); }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 var(--space-lg);
+      background: var(--color-white);
+      flex-shrink: 0;
+      min-width: var(--logo-min-width);
+    }
+    .logo-mark { display: flex; flex-direction: column; gap: 4px; }
+    .logo-mark span { display: block; height: 9px; border-radius: 2px; }
+    .logo-mark span:nth-child(1) { width: 36px; background: var(--color-primary); }
+    .logo-mark span:nth-child(2) { width: 24px; background: var(--color-accent); }
+    .logo-mark span:nth-child(3) { width: 30px; background: var(--color-cta); }
+
+    .logo-name {
+      font-family: var(--font-en);
+      font-weight: var(--weight-black);
+      font-size: var(--text-lg);
+      letter-spacing: 2px;
+      color: var(--color-dark);
+    }
+    .logo-sub { font-size: var(--text-xs); color: var(--color-muted); letter-spacing: 1px; margin-top: 3px; }
+
+    .header-nav {
+      flex: 1;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 48px;
+      gap: 44px;
+    }
+    .header-nav a { color: var(--color-white); text-align: center; transition: opacity var(--transition); }
+    .header-nav a:hover { opacity: 0.65; }
+    .nav-jp { display: block; font-size: 13px; font-weight: var(--weight-bold); letter-spacing: .5px; }
+    .nav-en { display: block; font-size: var(--text-xs); letter-spacing: 2px; opacity: .65; margin-top: 2px; }
+
+    /* ============================================================
+       FLOATING CTA
+       ============================================================ */
+    .float-cta { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 999; }
+    .float-cta a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-cta);
+      color: var(--color-white);
+      font-family: var(--font-en);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-black);
+      letter-spacing: 2px;
+      writing-mode: vertical-rl;
+      padding: 26px 15px;
+      transition: background var(--transition);
+    }
+    .float-cta a:hover { background: var(--color-cta-dark); }
+
+    /* ============================================================
+       SECTION HEADER（共通）
+       ============================================================ */
+    .sec-head { text-align: center; padding: var(--space-3xl) 0 var(--space-xl); }
+    .sec-label { font-size: 13px; letter-spacing: 2px; color: var(--color-muted); margin-bottom: var(--space-xs); }
+    .sec-title {
+      font-family: var(--font-en);
+      font-size: var(--text-section);
+      font-weight: var(--weight-black);
+      color: var(--color-dark);
+      letter-spacing: 6px;
+      line-height: 1;
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    #hero { height: 100vh; min-height: 600px; display: flex; padding-top: var(--header-height); }
+
+    .hero-left {
+      flex: 0 0 44%;
+      background: var(--color-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 var(--space-xl) 0 80px;
+    }
+    .hero-tagline { font-size: 14px; color: #888; letter-spacing: 2px; margin-bottom: var(--space-md); }
+    .hero-title {
+      font-family: var(--font-en);
+      font-size: var(--text-hero);
+      font-weight: var(--weight-black);
+      letter-spacing: 8px;
+      line-height: 1.1;
+      color: var(--color-dark);
+      text-transform: uppercase;
+    }
+    .hero-right { flex: 1; display: flex; flex-direction: column; }
+    .hero-top-bar { background: var(--color-primary); height: 13%; flex-shrink: 0; }
+    .hero-img-wrap { flex: 1; position: relative; overflow: hidden; }
+    .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .hero-ring {
+      position: absolute;
+      left: -110px; top: 50%; transform: translateY(-50%);
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.45);
+      pointer-events: none; z-index: 2;
+    }
+    .hero-bottom-bar {
+      background: var(--color-accent);
+      height: 13%; flex-shrink: 0;
+      display: flex; align-items: center;
+      padding-left: var(--space-lg);
+    }
+    .scroll-label {
+      font-family: var(--font-en);
+      font-size: var(--text-xs);
+      letter-spacing: 4px;
+      font-weight: var(--weight-black);
+      color: var(--color-white);
+    }
+
+    /* ============================================================
+       VALUE
+       ============================================================ */
+    #value { background: var(--color-bg-light); padding-bottom: var(--space-xl); }
+
+    .value-item { display: flex; min-height: 580px; margin-bottom: var(--space-md); }
+    .value-item.rev { flex-direction: row-reverse; }
+
+    .value-left {
+      flex: 0 0 58%;
+      position: relative;
+      display: flex; align-items: center;
+      padding: var(--space-2xl) var(--space-2xl) var(--space-2xl) 100px;
+    }
+    .value-item.rev .value-left { padding: var(--space-2xl) 100px var(--space-2xl) var(--space-2xl); }
+
+    .value-bg-word {
+      position: absolute;
+      font-family: var(--font-en);
+      font-size: 210px;
+      font-weight: var(--weight-black);
+      color: var(--color-accent);
+      opacity: .28;
+      line-height: 1;
+      top: 50%; left: -10px; transform: translateY(-50%);
+      letter-spacing: -6px;
+      pointer-events: none; white-space: nowrap; z-index: 0;
+    }
+    .value-card {
+      background: var(--color-white);
+      padding: 50px 56px;
+      position: relative; z-index: 1;
+      max-width: 520px;
+      box-shadow: var(--shadow-card);
+    }
+    .value-num {
+      font-family: var(--font-en);
+      font-size: var(--text-xs); letter-spacing: 2px; color: #bbb;
+      margin-bottom: var(--space-sm);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .value-num::before { content: ''; display: inline-block; width: 28px; height: 1px; background: #ddd; }
+    .value-headline {
+      font-size: clamp(18px, 2vw, 23px);
+      font-weight: var(--weight-bold);
+      line-height: var(--leading-tight);
+      color: var(--color-primary);
+      margin-bottom: var(--space-sm);
+    }
+    .value-headline em { font-style: normal; }
+    .value-body { font-size: var(--text-base); line-height: var(--leading-loose); color: var(--color-text); }
+
+    .value-right { flex: 1; position: relative; overflow: hidden; }
+    .value-right img { width: 100%; height: 100%; object-fit: cover; }
+    .value-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, var(--color-accent) 0%, transparent 55%);
+      opacity: .22;
+    }
+
+    /* ============================================================
+       MEMBER
+       ============================================================ */
+    #member { background: var(--color-white); padding-bottom: var(--space-3xl); }
+
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: var(--max-width-wide);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      gap: var(--space-md);
+    }
+    .member-card { text-align: center; }
+    .member-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: top; margin-bottom: var(--space-md); }
+    .member-num { font-family: var(--font-en); font-size: var(--text-xs); letter-spacing: 2px; color: #bbb; margin-bottom: 6px; }
+    .member-name { font-size: var(--text-md); font-weight: var(--weight-bold); letter-spacing: 1px; margin-bottom: 14px; }
+    .member-head { font-size: var(--text-lg); font-weight: var(--weight-bold); line-height: var(--leading-tight); margin-bottom: var(--space-sm); }
+    .member-body { font-size: 13px; line-height: var(--leading-loose); color: var(--color-text); text-align: left; }
+
+    /* ============================================================
+       INFO TABLE（CAREERS / COMPANY 共通）
+       ============================================================ */
+    .info-table {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .info-row { display: flex; gap: var(--space-sm); border-bottom: 1px solid var(--color-border); padding: 22px 12px; }
+    .info-label { font-size: var(--text-base); font-weight: var(--weight-bold); min-width: 100px; flex-shrink: 0; }
+    .info-val { font-size: var(--text-base); line-height: var(--leading-base); color: var(--color-text); }
+
+    #careers { background: var(--color-bg-light); padding-bottom: var(--space-3xl); }
+    #company { background: var(--color-white); padding-bottom: var(--space-3xl); }
+
+    /* ============================================================
+       MESSAGE
+       ============================================================ */
+    #message { background: var(--color-bg-light); padding-bottom: var(--space-3xl); }
+
+    .message-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      display: flex;
+      gap: var(--space-2xl);
+      align-items: flex-start;
+    }
+    .message-text { flex: 1; }
+    .msg-lead { font-size: var(--text-xl); font-weight: var(--weight-bold); line-height: 1.65; margin-bottom: var(--space-md); }
+    .msg-body { font-size: var(--text-base); line-height: var(--leading-loose); color: var(--color-text); margin-bottom: var(--space-sm); }
+    .msg-sign { margin-top: var(--space-md); font-size: 14px; font-weight: var(--weight-bold); color: var(--color-primary); }
+
+    .message-photo { flex: 0 0 340px; }
+    .message-photo img { width: 100%; height: 460px; object-fit: cover; object-position: top; }
+
+    /* ============================================================
+       ENTRY
+       ============================================================ */
+    #entry { background: var(--color-primary); padding: var(--space-2xl) var(--space-lg) var(--space-3xl); }
+
+    .entry-box {
+      background: var(--color-white);
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 80px;
+    }
+    .entry-title {
+      font-family: var(--font-en);
+      font-size: 40px; font-weight: var(--weight-black);
+      letter-spacing: 8px; text-align: center; margin-bottom: 6px;
+    }
+    .entry-sub { text-align: center; font-size: var(--text-sm); color: var(--color-muted); letter-spacing: 2px; margin-bottom: 44px; }
+
+    .form-row { display: flex; gap: var(--space-sm); margin-bottom: 14px; }
+    .form-field { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+    .form-field label { font-size: 11px; font-weight: var(--weight-bold); letter-spacing: 1px; color: #444; }
+    .form-field input,
+    .form-field textarea {
+      padding: 13px 16px;
+      border: 1px solid var(--color-border);
+      font-family: var(--font-ja);
+      font-size: var(--text-md);
+      outline: none;
+      transition: border-color var(--transition);
+      width: 100%;
+      background: var(--color-white);
+    }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--color-primary); }
+    .form-field textarea { height: 120px; resize: none; }
+
+    .btn-submit {
+      width: 100%; padding: 22px;
+      background: linear-gradient(135deg, var(--color-cta) 0%, var(--color-cta-dark) 100%);
+      color: var(--color-white); border: none;
+      font-family: var(--font-en);
+      font-size: var(--text-base); letter-spacing: 6px; font-weight: var(--weight-black);
+      cursor: pointer; margin-top: var(--space-md);
+      transition: opacity var(--transition);
+    }
+    .btn-submit:hover { opacity: .82; }
+    .form-note { text-align: center; font-size: var(--text-sm); color: var(--color-muted); margin-top: var(--space-sm); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      background: var(--color-white);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-md) 48px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .foot-logo { font-family: var(--font-en); font-size: var(--text-lg); font-weight: var(--weight-black); letter-spacing: 2px; }
+    .foot-copy { font-size: 11px; color: #bbb; letter-spacing: 2px; }
+    .foot-bottom { background: var(--color-dark); text-align: center; padding: 14px; font-family: var(--font-en); font-size: 11px; color: #666; letter-spacing: 2px; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 960px) {
+      .header-nav { gap: 20px; padding: 0 var(--space-md); }
+      .hero-left { flex: 0 0 50%; padding: 0 var(--space-lg); }
+      .hero-title { font-size: 36px; letter-spacing: 4px; }
+      .value-item, .value-item.rev { flex-direction: column; }
+      .value-left { padding: var(--space-xl) var(--space-lg); flex: none; }
+      .value-right { min-height: 280px; }
+      .member-grid { grid-template-columns: 1fr; padding: 0 var(--space-md); }
+      .info-table { grid-template-columns: 1fr; }
+      .message-wrap { flex-direction: column; }
+      .message-photo { flex: none; width: 100%; }
+      .entry-box { padding: var(--space-lg) var(--space-md); }
+      .form-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- フローティング CTAボタン -->
+  <div class="float-cta">
+    <a href="#entry">ENTRY</a>
+  </div>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-logo">
+      <div class="logo-mark" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <div>
+        <!-- ロゴ名：変更してください -->
+        <div class="logo-name">TEMPLATE</div>
+        <div class="logo-sub">テンプレート 採用サイト</div>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="#value"><span class="nav-jp">4つの強み</span><span class="nav-en">VALUE</span></a>
+      <a href="#member"><span class="nav-jp">メンバーの声</span><span class="nav-en">MEMBER</span></a>
+      <a href="#careers"><span class="nav-jp">採用情報</span><span class="nav-en">CAREERS</span></a>
+      <a href="#company"><span class="nav-jp">会社概要</span><span class="nav-en">COMPANY</span></a>
+      <a href="#message"><span class="nav-jp">代表メッセージ</span><span class="nav-en">MESSAGE</span></a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section id="hero">
+      <div class="hero-left">
+        <!-- キャッチコピー：変更してください -->
+        <p class="hero-tagline">価値を、想いを、未来を、届ける。</p>
+        <!-- メインタイトル：変更してください -->
+        <h1 class="hero-title">DIGITAL<br>SOLUTION<br>COMPANY</h1>
+      </div>
+      <div class="hero-right">
+        <div class="hero-top-bar" aria-hidden="true"></div>
+        <div class="hero-img-wrap">
+          <!-- ヒーロー画像：差し替えてください -->
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1000&q=80" alt="チームメンバー">
+          <div class="hero-ring" aria-hidden="true"></div>
+        </div>
+        <div class="hero-bottom-bar" aria-hidden="true">
+          <span class="scroll-label">SCROLL DOWN</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VALUE ── -->
+    <section id="value">
+      <div class="sec-head">
+        <p class="sec-label">4つの強み</p>
+        <h2 class="sec-title">VALUE</h2>
+      </div>
+
+      <!-- VALUE 01 -->
+      <div class="value-item">
+        <div class="value-left">
+          <div class="value-bg-word" aria-hidden="true">ONE</div>
+          <div class="value-card">
+            <div class="value-num">VALUE 01</div>
+            <h3 class="value-headline"><em>初任給35万円</em>からスタート！<br>平均 <em>年収520万円</em></h3>
+            <p class="value-body">成果が正直に給与に反映される、明確な評価制度を導入しています。入社1年目から結果を出せば収入は大きく変わります。「頑張りが報われる環境」を追求し、社員全員が豊かな人生を設計できるよう、業界トップクラスの報酬体系を整えています。</p>
+          </div>
+        </div>
+        <div class="value-right">
+          <!-- VALUE01 画像：差し替えてください -->
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="成果を出すメンバー">
+          <div class="value-overlay" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- VALUE 02 -->
+      <div class="value-item rev">
+        <div class="value-left">
+          <div class="value-bg-word" aria-hidden="true">TWO</div>
+          <div class="value-card">
+            <div class="value-num">VALUE 02</div>
+            <h3 class="value-headline">充実の研修制度で<br><em>未経験から即戦力</em>へ</h3>
+            <p class="value-body">業界・職種未経験でも安心。入社後3ヶ月の集中研修プログラムで、業界知識からビジネスマナー・営業スキルまで体系的に習得できます。先輩社員によるメンター制度も充実しており、一人ひとりのペースでしっかりサポートします。</p>
+          </div>
+        </div>
+        <div class="value-right">
+          <!-- VALUE02 画像：差し替えてください -->
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="研修風景">
+          <div class="value-overlay" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- VALUE 03 -->
+      <div class="value-item">
+        <div class="value-left">
+          <div class="value-bg-word" aria-hidden="true">THREE</div>
+          <div class="value-card">
+            <div class="value-num">VALUE 03</div>
+            <h3 class="value-headline">売上成長率<em>165%</em>！<br>エリア<em>No.1</em>の実績と安定性</h3>
+            <p class="value-body">設立以来、毎年売上高を更新し続けています。エリアでの圧倒的な実績は、顧客からの厚い信頼の証。安定した経営基盤のもと、社員は安心して長期的なキャリアを築けます。成長企業の最前線で、あなたの可能性を広げてください。</p>
+          </div>
+        </div>
+        <div class="value-right">
+          <!-- VALUE03 画像：差し替えてください -->
+          <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80" alt="ビジネス成長">
+          <div class="value-overlay" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- VALUE 04 -->
+      <div class="value-item rev">
+        <div class="value-left">
+          <div class="value-bg-word" aria-hidden="true">FOUR</div>
+          <div class="value-card">
+            <div class="value-num">VALUE 04</div>
+            <h3 class="value-headline">月6日の<em>完全休暇制度</em>で<br>ワークライフバランスを実現</h3>
+            <p class="value-body">仕事だけが人生ではありません。プライベートを大切にする社員こそが、高いパフォーマンスを発揮できると考えています。有給取得率85%以上、残業月平均10時間以下。充実した休暇制度で仕事もプライベートも全力で取り組める環境です。</p>
+          </div>
+        </div>
+        <div class="value-right">
+          <!-- VALUE04 画像：差し替えてください -->
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="ワークライフバランス">
+          <div class="value-overlay" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MEMBER ── -->
+    <section id="member">
+      <div class="sec-head">
+        <p class="sec-label">メンバーの声</p>
+        <h2 class="sec-title">MEMBER</h2>
+      </div>
+      <div class="member-grid">
+
+        <!-- MEMBER 01：差し替えてください -->
+        <article class="member-card">
+          <img class="member-photo" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=420&h=525&fit=crop&crop=top&q=80" alt="田中 健一">
+          <div class="member-num">MEMBER 01</div>
+          <div class="member-name">田中 健一</div>
+          <h3 class="member-head">エリア内<br>個人成績第1位</h3>
+          <p class="member-body">粘り強く取り組めば必ず結果がついてきます。エリアにおける個人成績第1位を獲得することもできました。初任給の高さはもちろん、結果がすぐに評価へ反映されるため月給は前職の1.5倍にアップ。本当にやりがいがある環境です。</p>
+        </article>
+
+        <!-- MEMBER 02：差し替えてください -->
+        <article class="member-card">
+          <img class="member-photo" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=420&h=525&fit=crop&crop=top&q=80" alt="鈴木 大地">
+          <div class="member-num">MEMBER 02</div>
+          <div class="member-name">鈴木 大地</div>
+          <h3 class="member-head">研修制度を活用し<br>新しいことを学ぶ</h3>
+          <p class="member-body">業務の知識や営業のノウハウを学び、以前よりもお客様に良いご提案ができています。その結果、エリアで個人成績第4位を獲得。地域の困り事を解決できる企業として、今後はさらに多分野で活躍できるようになりたいです。</p>
+        </article>
+
+        <!-- MEMBER 03：差し替えてください -->
+        <article class="member-card">
+          <img class="member-photo" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=420&h=525&fit=crop&crop=top&q=80" alt="佐藤 恭一">
+          <div class="member-num">MEMBER 03</div>
+          <div class="member-name">佐藤 恭一</div>
+          <h3 class="member-head">ワークライフ<br>バランスが取れた</h3>
+          <p class="member-body">前職では休日も仕事のことが頭から離れず、たまの休みは疲れをとるだけで終わっていました。当社では月6日は確実に全休が取れます。趣味を楽しみながらもエリアで個人成績上位を継続できています。</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── CAREERS ── -->
+    <section id="careers">
+      <div class="sec-head">
+        <p class="sec-label">採用情報</p>
+        <h2 class="sec-title">CAREERS</h2>
+      </div>
+      <dl class="info-table">
+        <div class="info-row"><dt class="info-label">職種</dt><dd class="info-val">営業・コンサルタント（正社員）（幹部候補）</dd></div>
+        <div class="info-row"><dt class="info-label">勤務地</dt><dd class="info-val">東京都渋谷区○○ 1-2-3</dd></div>
+        <div class="info-row"><dt class="info-label">初任給</dt><dd class="info-val">35万円〜</dd></div>
+        <div class="info-row"><dt class="info-label">福利厚生</dt><dd class="info-val">社会保険完備 / 夏季賞与 / 冬季賞与 / 研修制度 / 健康診断（年2回） / 退職金制度 / 大型積立金制度 他</dd></div>
+        <div class="info-row"><dt class="info-label">実働時間</dt><dd class="info-val">7時間40分<br>フレックスタイム制 / 週休2日制</dd></div>
+        <div class="info-row"><dt class="info-label">応募資格</dt><dd class="info-val">学歴・経験不問 / 普通自動車免許（MT）歓迎</dd></div>
+      </dl>
+    </section>
+
+    <!-- ── COMPANY ── -->
+    <section id="company">
+      <div class="sec-head">
+        <p class="sec-label">会社概要</p>
+        <h2 class="sec-title">COMPANY</h2>
+      </div>
+      <dl class="info-table">
+        <div class="info-row"><dt class="info-label">社名</dt><dd class="info-val">株式会社テンプレート</dd></div>
+        <div class="info-row"><dt class="info-label">売上</dt><dd class="info-val">3億4,682万円（前期比165%）</dd></div>
+        <div class="info-row"><dt class="info-label">代表</dt><dd class="info-label">山田 太郎</dd></div>
+        <div class="info-row"><dt class="info-label">住所</dt><dd class="info-val">〒150-0001 東京都渋谷区○○ 1-2-3</dd></div>
+        <div class="info-row"><dt class="info-label">資本金</dt><dd class="info-val">7,000,000円</dd></div>
+        <div class="info-row"><dt class="info-label">設立</dt><dd class="info-val">2005年4月1日</dd></div>
+      </dl>
+    </section>
+
+    <!-- ── MESSAGE ── -->
+    <section id="message">
+      <div class="sec-head">
+        <p class="sec-label">代表メッセージ</p>
+        <h2 class="sec-title">MESSAGE</h2>
+      </div>
+      <div class="message-wrap">
+        <div class="message-text">
+          <!-- リード・本文・署名：変更してください -->
+          <h3 class="msg-lead">ビジネスの未来を、<br>一緒に創りたい。</h3>
+          <p class="msg-body">今、ビジネスの世界は急速に変化しています。テクノロジーの進化とともに、私たちのサービスの形も日々進化し続けています。しかし変わらないことがあります。それは「人と人とのつながり」の大切さです。</p>
+          <p class="msg-body">私たちは単なるサービス提供者ではなく、お客様のビジネスパートナーとして共に成長することを大切にしています。社員一人ひとりが主役として輝ける舞台を用意し、その挑戦を全力でサポートする会社でありたいと考えています。</p>
+          <p class="msg-body">若い力と新しいアイデアを心から歓迎します。あなたの情熱と私たちの経験を掛け合わせれば、必ず大きな成果を出せると確信しています。ぜひ一緒に、新しいビジネスの形を創っていきましょう。</p>
+          <p class="msg-sign">代表取締役　山田 太郎</p>
+        </div>
+        <div class="message-photo">
+          <!-- 代表写真：差し替えてください -->
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=460&fit=crop&crop=top&q=80" alt="代表取締役 山田 太郎">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ENTRY ── -->
+    <section id="entry">
+      <div class="entry-box">
+        <h2 class="entry-title">ENTRY</h2>
+        <p class="entry-sub">エントリーフォーム</p>
+        <form id="entry-form" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">お名前 *</label>
+              <input id="name" name="name" type="text" placeholder="山田 太郎" required>
+            </div>
+            <div class="form-field">
+              <label for="kana">フリガナ *</label>
+              <input id="kana" name="kana" type="text" placeholder="ヤマダ タロウ" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="email">メールアドレス *</label>
+              <input id="email" name="email" type="email" placeholder="example@email.com" required>
+            </div>
+            <div class="form-field">
+              <label for="tel">電話番号 *</label>
+              <input id="tel" name="tel" type="tel" placeholder="090-0000-0000" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="msg">メッセージ</label>
+              <textarea id="msg" name="message" placeholder="お問い合わせ内容をご入力ください"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">送 信 す る</button>
+          <p class="form-note">24時間以内に、ご連絡させていただきます。</p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <!-- フッターロゴ：変更してください -->
+    <div class="foot-logo">TEMPLATE</div>
+    <small class="foot-copy">© TEMPLATE Co., Ltd.</small>
+  </footer>
+  <div class="foot-bottom"><small>© TEMPLATE</small></div>
+
+  <script>
+    // スムーススクロール
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // スクロール時ヘッダーシャドウ
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // フォーム送信（TODO: API連携に差し替えてください）
+    const form = document.getElementById('entry-form');
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        alert('お問い合わせありがとうございます。24時間以内にご連絡いたします。');
+        form.reset();
+      });
+    }
+  </script>
+</body>
+</html>
